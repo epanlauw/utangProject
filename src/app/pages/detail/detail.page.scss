@@ -11,6 +11,12 @@ ion-content {
     font-family: "Montserrat";
   }
 
+  .montserrat-creator {
+    font-weight: bold;
+    font-family: "Montserrat";
+    font-size: medium;
+  }
+
   ion-item {
     --border-bottom-width: 2px;
     --border-color: black;
@@ -33,9 +39,8 @@ ion-content {
 
   .img-75 {
     border: 0.5px solid rgba(0, 0, 0, 0.7);
-    width: 75%;
-    height: 75%;
+    width: 75px;
+    height: 75px;
     margin-bottom: 0px;
-    border-radius: 15px;
   }
 }

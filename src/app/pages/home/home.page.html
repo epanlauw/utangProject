@@ -9,22 +9,22 @@
   <div class="ion-text-center"><h2 class="montserrat">Featured Recipes</h2></div>
   <ion-slides pager="true">
     <ion-slide>
-      <ion-card>
+      <ion-card [routerLink]= "['/detail']" >
         <ion-img src="https://ecs7.tokopedia.net/blog-tokopedia-com/uploads/2018/05/Resep-Rendang-Daging-Khas-Padang.jpg"></ion-img>
       </ion-card>
     </ion-slide>
     <ion-slide>
-      <ion-card>
+      <ion-card [routerLink]= "['/detail']">
         <ion-img src="https://ecs7.tokopedia.net/blog-tokopedia-com/uploads/2018/05/Resep-Rendang-Daging-Khas-Padang.jpg"></ion-img>
       </ion-card>
     </ion-slide>
     <ion-slide>
-      <ion-card>
+      <ion-card [routerLink]= "['/detail']">
         <ion-img src="https://ecs7.tokopedia.net/blog-tokopedia-com/uploads/2018/05/Resep-Rendang-Daging-Khas-Padang.jpg"></ion-img>
       </ion-card>
     </ion-slide>
     <ion-slide>
-      <ion-card>
+      <ion-card [routerLink]= "['/detail']">
         <ion-img src="https://ecs7.tokopedia.net/blog-tokopedia-com/uploads/2018/05/Resep-Rendang-Daging-Khas-Padang.jpg"></ion-img>
       </ion-card>
     </ion-slide>
@@ -32,6 +32,47 @@
   <div class="hr ion-justify-content-center"></div>
   <div class="ion-text-start ion-margin-start">
     <h3 class="montserrat">Popular Recipes</h3>
+  </div>
+  <ion-grid>
+    <!-- nanti looping disini -->
+    <ion-row>
+      <ion-col>
+        <ion-card class="img-75">
+          <ion-img src="https://i0.wp.com/resepkoki.id/wp-content/uploads/2017/03/Resep-Putu-bambu.jpg?fit=2322%2C2322&ssl=1" ></ion-img>
+        </ion-card>
+      </ion-col>
+      <ion-col>
+        <ion-card class="img-75">
+          <ion-img src="https://i0.wp.com/resepkoki.id/wp-content/uploads/2017/03/Resep-Putu-bambu.jpg?fit=2322%2C2322&ssl=1" ></ion-img>
+        </ion-card>
+      </ion-col>
+      <ion-col>
+        <ion-card class="img-75">
+          <ion-img src="https://i0.wp.com/resepkoki.id/wp-content/uploads/2017/03/Resep-Putu-bambu.jpg?fit=2322%2C2322&ssl=1" ></ion-img>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-card class="img-75">
+          <ion-img src="https://i0.wp.com/resepkoki.id/wp-content/uploads/2017/03/Resep-Putu-bambu.jpg?fit=2322%2C2322&ssl=1" ></ion-img>
+        </ion-card>
+      </ion-col>
+      <ion-col>
+        <ion-card class="img-75">
+          <ion-img src="https://i0.wp.com/resepkoki.id/wp-content/uploads/2017/03/Resep-Putu-bambu.jpg?fit=2322%2C2322&ssl=1" ></ion-img>
+        </ion-card>
+      </ion-col>
+      <ion-col>
+        <ion-card class="img-75">
+          <ion-img src="https://i0.wp.com/resepkoki.id/wp-content/uploads/2017/03/Resep-Putu-bambu.jpg?fit=2322%2C2322&ssl=1" ></ion-img>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <div class="hr ion-justify-content-center"></div>
+  <div class="ion-text-start ion-margin-start">
+    <h3 class="montserrat">Kategori</h3>
   </div>
   <ion-grid>
     <!-- nanti looping disini -->
