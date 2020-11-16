@@ -45,8 +45,7 @@ ion-content {
     position: absolute;
     z-index: 99;
     bottom: 0px;
-    opacity: 0.5;
-    background: gray;
+    background: rgba(128, 128, 128, 0.5);
     ion-card-title {
       --color: #fff;
       margin-top: 10%;
