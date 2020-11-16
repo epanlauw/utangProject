@@ -1,11 +1,11 @@
 ion-header {
   ion-toolbar {
-    --background: #83bc6f;
+    --background: var(--boga-green-background);
   }
 }
 ion-content {
-  --background: linear-gradient(#83bc6f, #fff);
-
+  --background: var(--boga-background);
+  
   .montserrat {
     font-weight: bold;
     font-family: "Montserrat";
