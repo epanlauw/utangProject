@@ -1,0 +1,46 @@
+ion-header {
+  ion-toolbar {
+    --background: #83bc6f;
+  }
+}
+ion-content {
+  --background: linear-gradient(#83bc6f, #fff);
+
+  .montserrat {
+    font-weight: bold;
+    font-family: "Montserrat";
+  }
+
+  ion-item {
+    --border-bottom-width: 2px;
+    --border-color: black;
+  }
+
+  div {
+    .border {
+      --background: rgba(0, 0, 0, 0);
+    }
+  }
+
+  .hr {
+    border-bottom: 1px solid black;
+    margin: 10px 0;
+    width: 95%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .button-edit-profile {
+    padding-left: 2em;
+    padding-right: 2em;
+    border-radius: 20px;
+  }
+
+  .img-profile {
+    width: 70%;
+    height: auto;
+    margin: auto;
+    display: block;
+  }
+}
