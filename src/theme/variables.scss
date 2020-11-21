@@ -3,6 +3,11 @@
 
 /** Ionic CSS Variables **/
 :root {
+  /** Custom App Background **/
+  --boga-green-background: #83bc6f;
+  --boga-white-background: #ffffff;
+  --boga-background: linear-gradient(#83bc6f,#ffffff);
+
   /** primary **/
   --ion-color-primary: #3880ff;
   --ion-color-primary-rgb: 56, 128, 255;

@@ -1,10 +1,10 @@
-<ion-content>
+<ion-content class="ion-padding">
   <div class="ion-text-center ion-margin-top"><h1>BOGA</h1></div>
   <div class="img-center"><ion-img src="assets/icon/Logo.png"></ion-img></div>
   <form #f="ngForm" (ngSubmit)="onSubmit(f)">
     <div class="ion-text-center ion-margin-top">
       <ion-label>Email</ion-label>
-      <ion-item lines="none" class="roundedInput" expand="block"> 
+      <ion-item lines="none" class="roundedInput" expand="block">
         <ion-input type="text" ngModel name="email"></ion-input>
       </ion-item>
     </div>
@@ -18,5 +18,7 @@
       <ion-button type="submit" color="dark" size="large">Login</ion-button>
     </div>
   </form>
-  <div class="ion-text-center ion-margin-top"><p>Don’t have account yet?<ion-router-link href="/signup">Sign Up</ion-router-link> now</p></div>
+  <div class="ion-text-center ion-margin-top">
+    <p>Don’t have account yet? <a href="/signup">Sign Up</a> now</p>
+  </div>
 </ion-content>

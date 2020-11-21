@@ -1,5 +1,6 @@
 ion-content {
-  --background: linear-gradient(#fff, #83bc6f);
+  --background: var(--boga-background);
+  
   .img-center {
     width: 30%;
     height: auto;

@@ -1,5 +1,6 @@
 ion-content {
-  --background: linear-gradient(#fff, #83bc6f);
+  --background: var(--boga-background);
+
   h1 {
     font-family: Rosario;
     font-size: 13vw;
