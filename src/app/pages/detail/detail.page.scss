@@ -6,20 +6,14 @@ ion-header {
 ion-content {
   --background: var(--boga-background);
 
+  ion-card {
+    border: 1px solid black;
+    width: 70%;
+  }
+
   .montserrat {
     font-weight: bold;
     font-family: "Montserrat";
-  }
-
-  ion-item {
-    --border-bottom-width: 2px;
-    --border-color: black;
-  }
-
-  div {
-    .border {
-      --background: rgba(0, 0, 0, 0);
-    }
   }
 
   .hr {
@@ -31,10 +25,11 @@ ion-content {
     margin-right: auto;
   }
 
-  .img-75 {
-    border: 0.5px solid rgba(0, 0, 0, 0.7);
-    width: 75px;
-    height: 75px;
-    margin-bottom: 0px;
+  h1 {
+    font-weight: bold;
+  }
+
+  ion-list {
+    background-color: transparent;
   }
 }
