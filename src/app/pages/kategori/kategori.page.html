@@ -1,0 +1,27 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-title class="montserrat">BOGA</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button menu="recipesMenu"></ion-menu-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button (click)="changeGrid()" *ngIf="list == true">
+        <ion-icon name="grid"></ion-icon>
+      </ion-button>
+      <ion-button (click)="changeList()" *ngIf="grid == true">
+        <ion-icon name="list"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="ion-text-center"><h2 class="montserrat" style="font-weight: bold;">Kategori: Makanan Siang</h2></div>
+  <app-list *ngIf="list == true"></app-list>
+  <app-grid *ngIf="grid == true"></app-grid>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button>
+      <ion-icon name="filter"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

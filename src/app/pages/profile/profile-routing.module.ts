@@ -7,7 +7,11 @@ const routes: Routes = [
   {
     path: '',
     component: ProfilePage
-  }
+  },
+  {
+    path: 'myrecipe',
+    loadChildren: () => import('../../pages/myrecipe/myrecipe.module').then( m => m.MyrecipePageModule)
+  },
 ];
 
 @NgModule({

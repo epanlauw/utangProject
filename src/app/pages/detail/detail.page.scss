@@ -12,7 +12,6 @@ ion-content {
   }
 
   .montserrat {
-    font-weight: bold;
     font-family: "Montserrat";
   }
 
@@ -25,7 +24,8 @@ ion-content {
     margin-right: auto;
   }
 
-  h1 {
+  h1,
+  h2 {
     font-weight: bold;
   }
 
