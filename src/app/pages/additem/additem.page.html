@@ -1,0 +1,41 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button routerLink="/home"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="ion-text-center ion-margin-top"><h1>BOGA</h1></div>
+  <div class="img-center"><ion-img src="assets/icon/Logo.png"></ion-img></div>
+  <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+    <div class="ion-margin-top">
+      <ion-label>Nama Resep</ion-label>
+      <ion-item lines="none" class="roundedInput" expand="block"> 
+        <ion-input type="text" ngModel name="resep"></ion-input>
+      </ion-item>
+    </div>
+    <div class="ion-margin-top">
+      <ion-label>Bahan</ion-label>
+      <ion-item lines="none" class="roundedInput">
+        <ion-textarea ngModel name="bahan"></ion-textarea>
+      </ion-item>
+    </div>
+    <div class="ion-margin-top">
+      <ion-label>Langkah</ion-label>
+      <ion-item lines="none" class="roundedInput">
+        <ion-textarea ngModel name="langkah"></ion-textarea>
+      </ion-item>
+    </div>
+    <div class="ion-margin-top">
+      <ion-label>UrlVideo</ion-label>
+      <ion-item lines="none" class="roundedInput">
+        <ion-input type="text" ngModel name="urlVideo"></ion-input>
+      </ion-item>
+    </div>
+    <div class="ion-text-center ion-margin-top">
+      <ion-button type="submit" color="dark" size="large">Add Item</ion-button>
+    </div>
+  </form>
+</ion-content>

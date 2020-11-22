@@ -1,0 +1,69 @@
+ion-header {
+  ion-toolbar {
+    --background: #83bc6f;
+  }
+}
+ion-content {
+  --background: linear-gradient(#83bc6f, #fff);
+
+  .montserrat {
+    font-weight: bold;
+    font-family: "Montserrat";
+  }
+
+  ion-item {
+    --border-bottom-width: 2px;
+    --border-color: black;
+  }
+
+  div {
+    .border {
+      --background: rgba(0, 0, 0, 0);
+    }
+  }
+
+  .hr {
+    border-bottom: 1px solid black;
+    margin: 10px 0;
+    width: 95%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .button-edit-profile {
+    padding-left: 2em;
+    padding-right: 2em;
+    border-radius: 20px;
+  }
+
+  .img-additem {
+    width: 70%;
+    height: auto;
+    margin: auto;
+    display: block;
+  }
+
+  .roundedInput {
+    --highlight-height: 0;
+    --background: #fff;
+    --min-height: 16px;
+    box-shadow: 1px 8px 8px 0px rgba(0, 0, 0, 0.08);
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    max-width: 60% !important;
+    ion-input {
+      --padding-top: 5px;
+      --padding-bottom: 5px;
+    }
+    ion-textarea {
+      --padding-top: 40px;
+      --padding-bottom: 40px;
+    }
+  }
+
+  ion-label {
+    font-weight: bold;
+    font-family: "Montserrat";
+  }
+}
