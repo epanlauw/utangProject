@@ -31,6 +31,10 @@ const routes: Routes = [
     path: 'kategori',
     loadChildren: () => import('./pages/kategori/kategori.module').then( m => m.KategoriPageModule)
   },
+  {
+    path: 'additem',
+    loadChildren: () => import('./pages/additem/additem.module').then( m => m.AdditemPageModule)
+  },
 ];
 
 @NgModule({
