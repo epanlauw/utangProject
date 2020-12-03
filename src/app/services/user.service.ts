@@ -8,7 +8,10 @@ import { Injectable } from '@angular/core';
 })
 export class UserService {
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    
+    ) { }
 
   getUser(id_user: any){
     return this.http.get('http://localhost:8080/getUser.php', id_user);
@@ -25,8 +28,12 @@ export class UserService {
     return this.http.post<any>('http://localhost:8080/insertUser.php', data);
   }
 
-  deleteUser(id_user: any){
-    const data = JSON.stringify( {id: id_user});
-    return this.http.post<any>('http://localhost:8080/deleteUser.php', data);
+  loginUser(userLogin:any){
+    const user = {
+      email: userLogin.email,
+      password: userLogin.password
+    }
+
+    const data = JSON.stringify(user);
   }
 }
