@@ -50,7 +50,26 @@ export class AuthService {
   }
 
   registerUser(newUser:any) {
+    const options = {
+      headers: new HttpHeaders({
+        "Accept": 'application/json',
+        'Content-Type': 'application/json'
+      })
+    };
 
+    const user = {
+      first_name: newUser.first_name,
+      last_name : newUser.last_name,
+      email: newUser.email,
+      password: newUser.password,
+      date_of_birth: newUser.dob,
+      gender: newUser.gender,
+      avatar_url: newUser.avatar_url
+    }
+
+    const data = JSON.stringify(user);
+
+    return this.http.post(environment.api_url + 'register', data, options);
   }
 
 }
