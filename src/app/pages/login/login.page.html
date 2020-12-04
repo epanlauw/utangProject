@@ -1,22 +1,39 @@
 <ion-content class="ion-padding">
   <div class="ion-text-center ion-margin-top"><h1>BOGA</h1></div>
   <div class="img ion-justify-content-center"><ion-img src="assets/icon/Logo.png"></ion-img></div>
-  <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+  <form [formGroup]="form" (ngSubmit)="loginUser(form.value)">
     <div class="ion-text-center ion-margin-top">
       <ion-label>Email</ion-label>
       <ion-item lines="none" class="roundedInput" expand="block">
-        <ion-input type="text" ngModel name="email"></ion-input>
+        <ion-input type="email" formControlName="email"></ion-input>
       </ion-item>
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validation_messages.email">
+          <ion-text class="error-message" color="danger" 
+          *ngIf="form.get('email').hasError(validation.type) && (form.get('email').dirty || form.get('email').touched)">
+          {{validation.message}}
+          </ion-text>
+        </ng-container>
+      </div>
     </div>
     <div class="ion-text-center ion-margin-top">
       <ion-label>Password</ion-label>
       <ion-item lines="none" class="roundedInput">
-        <ion-input type="password" ngModel name="password"></ion-input>
+        <ion-input type="password" formControlName="password"></ion-input>
       </ion-item>
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validation_messages.password">
+          <ion-text class="error-message" color="danger" 
+          *ngIf="form.get('password').hasError(validation.type) && (form.get('password').dirty || form.get('password').touched)">
+          {{validation.message}}
+          </ion-text>
+        </ng-container>
+      </div>
     </div>
     <div class="ion-text-center ion-margin-top">
-      <ion-button type="submit" color="dark" size="large">Login</ion-button>
+      <ion-button type="submit" color="dark" size="large" [disabled]="!form.valid">Login</ion-button>
     </div>
+    <label class="error-message">{{errorMessage}}</label>
   </form>
   <div class="ion-text-center ion-margin-top">
     <p>Don’t have account yet? <a style="text-decoration: none;" href="/signup">Sign Up</a> now</p>

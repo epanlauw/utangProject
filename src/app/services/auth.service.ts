@@ -8,7 +8,7 @@ import { NativeStorage } from '@ionic-native/native-storage/ngx';
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
+export class AuthService {
   isLoggedIn = false;
   token:any;
   error: any;
@@ -30,7 +30,9 @@ export class UserService {
       password: newUser.password,
     };
 
-    return this.http.post(environment.api_url + 'login', user, options).pipe(
+    const data = JSON.stringify(user);
+
+    return this.http.post(environment.api_url + 'login', data, options).pipe(
       tap(token => {
         this.storage.setItem('token', token)
         .then(
@@ -50,6 +52,5 @@ export class UserService {
   registerUser(newUser:any) {
 
   }
-
 
 }
