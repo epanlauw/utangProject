@@ -31,9 +31,11 @@
       </div>
     </div>
     <div class="ion-text-center ion-margin-top">
+      <ion-text color="danger" *ngIf="errorData">Email or Password is Incorrect</ion-text>
+    </div>
+    <div class="ion-text-center ion-margin-top">
       <ion-button type="submit" color="dark" size="large" [disabled]="!form.valid">Login</ion-button>
     </div>
-    <label class="error-message">{{errorMessage}}</label>
   </form>
   <div class="ion-text-center ion-margin-top">
     <p>Don’t have account yet? <a style="text-decoration: none;" href="/signup">Sign Up</a> now</p>

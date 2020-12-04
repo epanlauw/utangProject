@@ -13,6 +13,7 @@ export class LoginPage implements OnInit {
   form: FormGroup;
   errorMessage: string = '';
   successMessage: string = '';
+  errorData =  null;
 
   validation_messages = {
     email: [
@@ -46,9 +47,12 @@ export class LoginPage implements OnInit {
 
   loginUser(value) {
     this.authSrv.loginUser(value).subscribe(res => {
+      this.errorData =  null;
       console.log(res);
-    }, err => 
-    console.log(err)
+    },
+    (err:any) => {
+       this.errorData = err.error;
+    }
     );
   }
 }
