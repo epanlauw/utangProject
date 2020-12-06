@@ -10,7 +10,7 @@
   <div class="ion-text-center ion-margin-top">
     <h1 class="montserrat">BOGA</h1>
   </div>
-  <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+  <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
     <ion-card class="img-75 img-center">
       <ion-img src="https://ecs7.tokopedia.net/blog-tokopedia-com/uploads/2018/05/Resep-Rendang-Daging-Khas-Padang.jpg" ></ion-img>
       <div class="overlay">
@@ -20,29 +20,49 @@
     <div class="ion-margin-top">
       <ion-label class="montserrat ion-margin-left">Nama Resep</ion-label>
       <ion-item> 
-        <ion-input type="text" ngModel name="nama"></ion-input>
+        <ion-input type="text" formControlName="nama"></ion-input>
       </ion-item>
     </div>
     <div class="ion-margin-top">
       <ion-label class="montserrat ion-margin-left">Bahan</ion-label>
       <ion-item> 
-        <ion-input type="text" ngModel name="bahan"></ion-input>
+        <ion-textarea formControlName="bahan"></ion-textarea>
       </ion-item>
-      <ion-button size="small"><ion-icon name="add-outline"></ion-icon>Add More</ion-button>
     </div>
     <div class="ion-margin-top">
       <ion-label class="montserrat ion-margin-left">Langkah - Langkah</ion-label>
       <ion-item> 
-        <ion-input type="text" ngModel name="langkah"></ion-input>
+        <ion-textarea formControlName="langkah"></ion-textarea>
       </ion-item>
-      <ion-button color="dark" size="small"><ion-icon name="add-outline"></ion-icon>Add More</ion-button>
     </div>
     <div class="ion-margin-top">
       <ion-label class="montserrat ion-margin-left">Url Video</ion-label>
       <ion-item> 
-        <ion-input color="dark" type="text" ngModel name="url"></ion-input>
+        <ion-input color="dark" type="text" formControlName="url"></ion-input>
       </ion-item>
     </div>
-    <ion-button color="dark" expand="block">Submit</ion-button>
+    <div class="ion-margin-top">
+      <ion-label class="montserrat ion-margin-left">Gambar Recipe</ion-label>
+      <ion-item> 
+        <ion-button size="small" (click)="getPicture('camera')">
+          <ion-icon name="camera" slot="start"></ion-icon>
+          <ion-label>Camera</ion-label>
+        </ion-button>
+    
+        <ion-button size="small" (click)="getPicture('gallery')">
+          <ion-icon name="image" slot="start"></ion-icon>
+          <ion-label>Gallery</ion-label>
+        </ion-button>
+    
+        <input type="file" *ngIf="isDesktop" #filePicker (change)="onFileChoose($event)"/>
+
+        <ion-card *ngIf="photo">
+          <ion-card-content>
+            <img [src]="photo">
+          </ion-card-content>
+        </ion-card>
+      </ion-item>
+    </div>
+    <ion-button type="submit" color="dark" expand="block">Submit</ion-button>
   </form> 
 </ion-content>

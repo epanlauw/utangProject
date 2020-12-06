@@ -12,14 +12,10 @@ export class RecipeService {
     return this.http.get('http://localhost:8080/getUser.php', id_recipe);
   }
 
-  insertRecipe(newUser: any){
-    const recipe = {
-      nama: newUser.nama,
-      bahan: newUser.bahan,
-      langkah: newUser.langkah,
-      urlVideo: newUser.urlVideo
-    }
-    const data = JSON.stringify(recipe);
+  insertRecipe(newInsert: any){
+    console.log(newInsert);
+    const data = JSON.stringify(newInsert);
+    console.log(data);
     return this.http.post<any>('http://localhost:8080/insertUser.php', data);
   }
 
