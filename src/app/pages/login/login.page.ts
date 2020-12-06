@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
+import { LoadingController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -29,7 +30,8 @@ export class LoginPage implements OnInit {
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
-    private authSrv: AuthService
+    private authSrv: AuthService,
+    private loadingCtrl: LoadingController
   ) {}
 
   ngOnInit() {
@@ -45,14 +47,27 @@ export class LoginPage implements OnInit {
     });
   }
 
-  loginUser(value) {
+  async presentLoading() {
+    const loading = await this.loadingCtrl.create({
+      message: 'Please wait...'
+    });
+
+    loading.present();
+    return loading;
+  }
+
+  async loginUser(value) {
+    const loading = await this.presentLoading();
+
     this.authSrv.loginUser(value).subscribe(res => {
       this.errorData =  null;
       console.log(res);
+      loading.dismiss();
       this.router.navigateByUrl("home");
     },
     (err:any) => {
        this.errorData = err.error;
+       console.log(this.errorData);
     }
     );
   }

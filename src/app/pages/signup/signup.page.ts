@@ -4,6 +4,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Router } from "@angular/router";
 import { Camera, CameraResultType, CameraSource, Capacitor } from '@capacitor/core';
 import { Platform } from '@ionic/angular';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: "app-signup",
@@ -19,6 +20,7 @@ export class SignupPage implements OnInit {
   errorMessage: string = '';
   successMessage: string = '';
   gender: string = '';
+  imageUrl: string = '';
 
   validation_message = {
     'first_name': [
@@ -30,17 +32,21 @@ export class SignupPage implements OnInit {
     ],
     'password': [
       { type: 'required', message: 'Password is required'},
-      { type: 'minLength', message: 'Password must be at least 6 characters long.'}
+      { type: 'minlength', message: 'Password must be at least 6 characters long.'}
+    ],
+    'gender': [
+      { type: 'required', message: 'Gender is required'},
     ],
     'dob': [
-      { type: 'required', message: 'Tanggal Lahir is required'},
+      { type: 'required', message: 'Date of Birth is required'},
     ]
   }
   constructor(
     private router: Router,
     private sanitizer: DomSanitizer,
     private platform: Platform,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private authSrv: AuthService
   ) {}
 
   ngOnInit() {
@@ -61,10 +67,9 @@ export class SignupPage implements OnInit {
         Validators.minLength(6),
         Validators.required
       ])),
-      gender: new FormControl(null, {
-        updateOn: 'blur',
-        validators: [Validators.required]
-      }),
+      gender: new FormControl('', Validators.compose([
+        Validators.required
+      ])),
       dob: new FormControl('', Validators.compose([
         Validators.required
       ]))
@@ -72,7 +77,20 @@ export class SignupPage implements OnInit {
   }
 
   registerUser(value) {
-    console.log(value);
+    this.gender =   value.gender[0].toUpperCase() + value.gender.slice(1);
+    const user = {
+      first_name: value.first_name,
+      last_name: value.last_name? value.last_name : '',
+      email: value.email,
+      password: value.password,
+      gender: this.gender,
+      date_of_birth: value.dob,
+      avatar_url: this.imageUrl
+    }
+    
+    this.authSrv.registerUser(user).subscribe(res => {
+      console.log(res);
+    });
   }
 
   async getPicture(type: string) {
@@ -90,7 +108,7 @@ export class SignupPage implements OnInit {
     });
 
     this.photo = this.sanitizer.bypassSecurityTrustResourceUrl(image && (image.dataUrl));
-    console.log(this.photo);
+    this.imageUrl = image.dataUrl;
   }
 
   onFileChoose(event: Event) {

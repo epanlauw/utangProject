@@ -14,6 +14,15 @@
             </ion-item>
           </ion-col>
         </ion-row>
+        <ion-row>
+          <div class="validation-errors">
+            <ng-container *ngFor="let validation of validation_message.first_name">
+              <ion-text color="danger" *ngIf="form.get('first_name').hasError(validation.type) && (form.get('first_name').dirty || form.get('first_name').touched)">
+                {{validation.message}}
+              </ion-text>
+            </ng-container>
+          </div>
+        </ion-row>
       </ion-grid>
     </div>
     <div class="ion-margin-top">
@@ -42,6 +51,15 @@
             </ion-item>
           </ion-col>
         </ion-row>
+        <ion-row>
+          <div class="validation-errors">
+            <ng-container *ngFor="let validation of validation_message.email">
+              <ion-text color="danger" *ngIf="form.get('email').hasError(validation.type) && (form.get('email').dirty || form.get('email').touched)">
+                {{validation.message}}
+              </ion-text>
+            </ng-container>
+          </div>
+        </ion-row>
       </ion-grid>
     </div>
     <div class="ion-margin-top">
@@ -55,6 +73,15 @@
               <ion-input type="password" formControlName="password"></ion-input>
             </ion-item>
           </ion-col>
+        </ion-row>
+        <ion-row>
+          <div class="validation-errors">
+            <ng-container *ngFor="let validation of validation_message.password">
+              <ion-text color="danger" *ngIf="form.get('password').hasError(validation.type) && (form.get('password').dirty || form.get('password').touched)">
+                {{validation.message}}
+              </ion-text>
+            </ng-container>
+          </div>
         </ion-row>
       </ion-grid>
     </div>
@@ -73,6 +100,15 @@
             </ion-item>
           </ion-col>
         </ion-row>
+        <ion-row>
+          <div class="validation-errors">
+            <ng-container *ngFor="let validation of validation_message.gender">
+              <ion-text color="danger" *ngIf="form.get('gender').hasError(validation.type) && (form.get('gender').dirty || form.get('gender').touched)">
+                {{validation.message}}
+              </ion-text>
+            </ng-container>
+          </div>
+        </ion-row>
       </ion-grid>
     </div>
     <div class="ion-margin-top">
@@ -83,9 +119,18 @@
           </ion-col>
           <ion-col size="8">
             <ion-item lines="none" class="roundedInput" expand="block">
-              <ion-datetime displayFormat="DD MMMM YYYY" min="1920-01-01" max="2019-12-31" formControlName="dob"></ion-datetime>
+              <ion-datetime displayFormat="DD MMMM YYYY" min="1920-01-01" max="2015-12-31" formControlName="dob"></ion-datetime>
             </ion-item>
           </ion-col>
+        </ion-row>
+        <ion-row>
+          <div class="validation-errors">
+            <ng-container *ngFor="let validation of validation_message.dob">
+              <ion-text color="danger" *ngIf="form.get('dob').hasError(validation.type) && (form.get('dob').dirty || form.get('dob').touched)">
+                {{validation.message}}
+              </ion-text>
+            </ng-container>
+          </div>
         </ion-row>
       </ion-grid>
     </div>
@@ -117,7 +162,7 @@
       </ion-grid>
     </div>
     <div class="ion-text-center ion-margin-top">
-      <ion-button type="submit" color="dark" size="large">Sign Up</ion-button>
+      <ion-button type="submit" color="dark" size="large" [disabled]="!form.valid">Sign Up</ion-button>
     </div>
   </form>
   <div class="ion-text-center ion-margin-top">

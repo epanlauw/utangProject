@@ -62,14 +62,15 @@ export class AuthService {
       last_name : newUser.last_name,
       email: newUser.email,
       password: newUser.password,
-      date_of_birth: newUser.dob,
+      date_of_birth: newUser.date_of_birth,
       gender: newUser.gender,
-      avatar_url: newUser.avatar_url
+      avatar_url: newUser.avatar_url,
+      id_role: 1
     }
 
-    const data = JSON.stringify(user);
+    console.log(user);
 
-    return this.http.post(environment.api_url + 'register', data, options);
+    return this.http.post(environment.api_url + 'register', user, options);
   }
 
 }
