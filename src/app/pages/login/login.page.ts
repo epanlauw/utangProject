@@ -47,10 +47,22 @@ export class LoginPage implements OnInit {
     });
   }
 
-  loginUser(value) {
+  async presentLoading() {
+    const loading = await this.loadingCtrl.create({
+      message: 'Please wait...'
+    });
+
+    loading.present();
+    return loading;
+  }
+
+  async loginUser(value) {
+    const loading = await this.presentLoading();
+
     this.authSrv.loginUser(value).subscribe(res => {
       this.errorData =  null;
       console.log(res);
+      loading.dismiss();
       this.router.navigateByUrl("home");
     },
     (err:any) => {
