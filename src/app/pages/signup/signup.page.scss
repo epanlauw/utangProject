@@ -1,6 +1,6 @@
 ion-content {
   --background: var(--boga-background);
-  
+
   .img-center {
     width: 30%;
     height: auto;
@@ -39,5 +39,9 @@ ion-content {
   ion-label {
     font-weight: bold;
     font-family: "Montserrat";
+  }
+
+  input[type="file"] {
+    display: none;
   }
 }

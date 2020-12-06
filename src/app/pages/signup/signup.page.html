@@ -1,16 +1,30 @@
 <ion-content class="ion-padding">
   <div class="img-center"><ion-img src="assets/icon/Logo.png"></ion-img></div>
   <div class="ion-text-center"><h1>BOGA</h1></div>
-  <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+  <form [formGroup]="form" (ngSubmit)="registerUser(form.value)">
     <div class="ion-margin-top">
       <ion-grid>
         <ion-row>
           <ion-col>
-            <ion-label>Nama</ion-label>
+            <ion-label>Nama Depan</ion-label>
           </ion-col>
           <ion-col size="8">
             <ion-item lines="none" class="roundedInput" expand="block">
-              <ion-input type="text" ngModel name="nama"></ion-input>
+              <ion-input type="text" formControlName="first_name"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+    <div class="ion-margin-top">
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-label>Nama Belakang</ion-label>
+          </ion-col>
+          <ion-col size="8">
+            <ion-item lines="none" class="roundedInput" expand="block">
+              <ion-input type="text" formControlName="last_name"></ion-input>
             </ion-item>
           </ion-col>
         </ion-row>
@@ -24,7 +38,7 @@
           </ion-col>
           <ion-col size="8">
             <ion-item lines="none" class="roundedInput" expand="block">
-              <ion-input type="text" ngModel name="email"></ion-input>
+              <ion-input type="email" formControlName="email"></ion-input>
             </ion-item>
           </ion-col>
         </ion-row>
@@ -38,7 +52,24 @@
           </ion-col>
           <ion-col size="8">
             <ion-item lines="none" class="roundedInput" expand="block">
-              <ion-input type="password" ngModel name="password"></ion-input>
+              <ion-input type="password" formControlName="password"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+    <div class="ion-margin-top">
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-label>Gender</ion-label>
+          </ion-col>
+          <ion-col size="8">
+            <ion-item lines="none" class="roundedInput">
+              <ion-select formControlName="gender" placeholder="Select One">
+                <ion-select-option value="female">Female</ion-select-option>
+                <ion-select-option value="male">Male</ion-select-option>
+              </ion-select>
             </ion-item>
           </ion-col>
         </ion-row>
@@ -52,7 +83,7 @@
           </ion-col>
           <ion-col size="8">
             <ion-item lines="none" class="roundedInput" expand="block">
-              <ion-datetime displayFormat="DD MMMM YYYY" min="1920-01-01" max="2019-12-31" name="dob"></ion-datetime>
+              <ion-datetime displayFormat="DD MMMM YYYY" min="1920-01-01" max="2019-12-31" formControlName="dob"></ion-datetime>
             </ion-item>
           </ion-col>
         </ion-row>
@@ -65,10 +96,23 @@
             <ion-label>Photo</ion-label>
           </ion-col>
           <ion-col size="8">
-            <ion-item lines="none" class="roundedInput" expand="block">
-              <ion-input type="text" ngModel name="email"></ion-input>
-            </ion-item>
+            <ion-button style="margin-top:0px;" size="small" (click)="getPicture('camera')">
+              <ion-icon name="camera" slot="start"></ion-icon>
+              <ion-label>Camera</ion-label>
+            </ion-button>
+            <ion-button style="margin-top:0px;" size="small" (click)="getPicture('gallery')">
+              <ion-icon name="image" slot="start"></ion-icon>
+              <ion-label>Gallery</ion-label>
+            </ion-button>
           </ion-col>
+          <input type="file" *ngIf="isDekstop" #filePicker (change)="onFileChoose($event)" formControlName="avatar_url">
+        </ion-row>
+        <ion-row>
+          <ion-card *ngIf="photo">
+            <ion-card-content>
+              <img [src]="photo">
+            </ion-card-content>
+          </ion-card>
         </ion-row>
       </ion-grid>
     </div>

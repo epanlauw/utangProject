@@ -49,6 +49,7 @@ export class LoginPage implements OnInit {
     this.authSrv.loginUser(value).subscribe(res => {
       this.errorData =  null;
       console.log(res);
+      this.router.navigateByUrl("home");
     },
     (err:any) => {
        this.errorData = err.error;
