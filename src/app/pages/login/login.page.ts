@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
+import { LoadingController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -29,7 +30,8 @@ export class LoginPage implements OnInit {
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
-    private authSrv: AuthService
+    private authSrv: AuthService,
+    private loadingCtrl: LoadingController
   ) {}
 
   ngOnInit() {
@@ -53,6 +55,7 @@ export class LoginPage implements OnInit {
     },
     (err:any) => {
        this.errorData = err.error;
+       console.log(this.errorData);
     }
     );
   }
