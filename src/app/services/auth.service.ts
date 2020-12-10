@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { tap } from "rxjs/operators";
-import { NativeStorage } from "@ionic-native/native-storage/ngx";
 import { ApiService } from "./api.service";
+import { StorageService } from './storage.service';
 
 @Injectable({
   providedIn: "root",
@@ -10,7 +10,7 @@ export class AuthService {
   isLoggedIn = false;
   token: any;
 
-  constructor(private api: ApiService, private storage: NativeStorage) {}
+  constructor(private api: ApiService, private storage: StorageService) {}
 
   loginUser(newUser: any) {
     const user = {
@@ -20,11 +20,11 @@ export class AuthService {
 
     return this.api.auth("login", user).pipe(
       tap((token) => {
-        this.storage.setItem("token", token).then(
+        this.storage.setObject("token", token).then(
           () => {
             console.log("Token Stored");
           },
-          (error) => console.error("Error storing item", error)
+          (err) => console.error("Error storing item", err)
         );
         this.token = token;
         this.isLoggedIn = true;
@@ -45,6 +45,18 @@ export class AuthService {
       id_role: 1,
     };
 
-    return this.api.auth("register", user);
+    return this.api.auth("register", user).pipe(
+      tap((token) => {
+        this.storage.setObject("token", token).then(
+          () => {
+            console.log("Token Stored");
+          },
+          (err) => console.error("Error storing item", err)
+        );
+        this.token = token;
+        this.isLoggedIn = true;
+        return token;
+      })
+    );
   }
 }

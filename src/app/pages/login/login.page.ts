@@ -67,6 +67,7 @@ export class LoginPage implements OnInit {
     },
     (err:any) => {
        this.errorData = err.error;
+       loading.dismiss();
        console.log(this.errorData);
     }
     );

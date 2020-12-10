@@ -1,9 +1,9 @@
 import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
-import { FormBuilder, FormControl, FormGroup, NgForm, Validators } from "@angular/forms";
+import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Router } from "@angular/router";
 import { Camera, CameraResultType, CameraSource, Capacitor } from '@capacitor/core';
-import { Platform } from '@ionic/angular';
+import { LoadingController, Platform } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -21,6 +21,7 @@ export class SignupPage implements OnInit {
   successMessage: string = '';
   gender: string = '';
   imageUrl: string = '';
+  lastName: string = '';
 
   validation_message = {
     'first_name': [
@@ -41,12 +42,21 @@ export class SignupPage implements OnInit {
       { type: 'required', message: 'Date of Birth is required'},
     ]
   }
+
+  errors_message = {
+    'first_name': [],
+    'email': [],
+    'password': [],
+    'gender': [],
+    'date_of_birth': [],
+  }
   constructor(
     private router: Router,
     private sanitizer: DomSanitizer,
     private platform: Platform,
     private formBuilder: FormBuilder,
-    private authSrv: AuthService
+    private authSrv: AuthService,
+    private loadingCtrl: LoadingController
   ) {}
 
   ngOnInit() {
@@ -76,20 +86,36 @@ export class SignupPage implements OnInit {
     });
   }
 
-  registerUser(value) {
+  async presentLoading() {
+    const loading = await this.loadingCtrl.create({
+      message: 'Please wait...'
+    });
+
+    loading.present();
+    return loading;
+  }
+
+  async registerUser(value) {
+    const loading = await this.presentLoading();
+
     this.gender =   value.gender[0].toUpperCase() + value.gender.slice(1);
     const user = {
       first_name: value.first_name,
-      last_name: value.last_name? value.last_name : '',
+      last_name: value.last_name != null? value.last_name : this.lastName,
       email: value.email,
       password: value.password,
       gender: this.gender,
       date_of_birth: value.dob,
       avatar_url: this.imageUrl
     }
-    
+        
     this.authSrv.registerUser(user).subscribe(res => {
       console.log(res);
+      loading.dismiss();
+      this.router.navigateByUrl("home");
+    }, err => {
+      console.log(err);
+      loading.dismiss();
     });
   }
 
