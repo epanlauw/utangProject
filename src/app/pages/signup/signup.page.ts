@@ -49,6 +49,7 @@ export class SignupPage implements OnInit {
     'password': [],
     'gender': [],
     'date_of_birth': [],
+    'photo': []
   }
   constructor(
     private router: Router,
@@ -114,7 +115,33 @@ export class SignupPage implements OnInit {
       loading.dismiss();
       this.router.navigateByUrl("home");
     }, err => {
-      console.log(err);
+      //console.log(err.error.data);
+      const error =  err.error.data;
+      if(error.first_name) {
+        this.errors_message.first_name = error.first_name;
+      } 
+
+      if(error.email) {
+        this.errors_message.email = error.email;
+      }
+
+      if(error.password) {
+        this.errors_message.password = error.password;
+      }
+
+      if(error.gender) {
+        this.errors_message.gender = error.gender;
+      }
+
+      if(error.date_of_birth) {
+        this.errors_message.date_of_birth = error.date_of_birth;
+      }
+
+      if(error.avatar_url) {
+        this.errors_message.photo = ["Required Photo"];
+      }
+
+      console.log(this.errors_message);
       loading.dismiss();
     });
   }

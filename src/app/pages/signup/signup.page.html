@@ -23,6 +23,15 @@
             </ng-container>
           </div>
         </ion-row>
+        <ion-row>
+          <div class="validation-errors">
+            <ng-container *ngFor="let validation of errors_message.first_name">
+              <ion-text color="danger" *ngIf="errors_message.first_name">
+                {{validation}}
+              </ion-text>
+            </ng-container>
+          </div>
+        </ion-row>
       </ion-grid>
     </div>
     <div class="ion-margin-top">
@@ -60,6 +69,15 @@
             </ng-container>
           </div>
         </ion-row>
+        <ion-row>
+          <div class="validation-errors">
+            <ng-container *ngFor="let validation of errors_message.email">
+              <ion-text color="danger" *ngIf="errors_message.email">
+                {{validation}}
+              </ion-text>
+            </ng-container>
+          </div>
+        </ion-row>
       </ion-grid>
     </div>
     <div class="ion-margin-top">
@@ -79,6 +97,15 @@
             <ng-container *ngFor="let validation of validation_message.password">
               <ion-text color="danger" *ngIf="form.get('password').hasError(validation.type) && (form.get('password').dirty || form.get('password').touched)">
                 {{validation.message}}
+              </ion-text>
+            </ng-container>
+          </div>
+        </ion-row>
+        <ion-row>
+          <div class="validation-errors">
+            <ng-container *ngFor="let validation of errors_message.password">
+              <ion-text color="danger" *ngIf="errors_message.password">
+                {{validation}}
               </ion-text>
             </ng-container>
           </div>
@@ -109,6 +136,15 @@
             </ng-container>
           </div>
         </ion-row>
+        <ion-row>
+          <div class="validation-errors">
+            <ng-container *ngFor="let validation of errors_message.gender">
+              <ion-text color="danger" *ngIf="errors_message.gender">
+                {{validation}}
+              </ion-text>
+            </ng-container>
+          </div>
+        </ion-row>
       </ion-grid>
     </div>
     <div class="ion-margin-top">
@@ -128,6 +164,15 @@
             <ng-container *ngFor="let validation of validation_message.dob">
               <ion-text color="danger" *ngIf="form.get('dob').hasError(validation.type) && (form.get('dob').dirty || form.get('dob').touched)">
                 {{validation.message}}
+              </ion-text>
+            </ng-container>
+          </div>
+        </ion-row>
+        <ion-row>
+          <div class="validation-errors">
+            <ng-container *ngFor="let validation of errors_message.date_of_birth">
+              <ion-text color="danger" *ngIf="errors_message.date_of_birth">
+                {{validation}}
               </ion-text>
             </ng-container>
           </div>
@@ -158,6 +203,15 @@
               <img [src]="photo">
             </ion-card-content>
           </ion-card>
+        </ion-row>
+        <ion-row>
+          <div class="validation-errors">
+            <ng-container *ngFor="let validation of errors_message.photo">
+              <ion-text color="danger" *ngIf="errors_message.photo">
+                {{validation}}
+              </ion-text>
+            </ng-container>
+          </div>
         </ion-row>
       </ion-grid>
     </div>
