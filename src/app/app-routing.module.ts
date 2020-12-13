@@ -23,19 +23,23 @@ const routes: Routes = [
   },
   {
     path: 'profile',
-    loadChildren: () => import('./pages/profile/profile.module').then( m => m.ProfilePageModule)
+    loadChildren: () => import('./pages/profile/profile.module').then( m => m.ProfilePageModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'detail',
-    loadChildren: () => import('./pages/detail/detail.module').then( m => m.DetailPageModule)
+    loadChildren: () => import('./pages/detail/detail.module').then( m => m.DetailPageModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'kategori',
-    loadChildren: () => import('./pages/kategori/kategori.module').then( m => m.KategoriPageModule)
+    loadChildren: () => import('./pages/kategori/kategori.module').then( m => m.KategoriPageModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'additem',
-    loadChildren: () => import('./pages/additem/additem.module').then( m => m.AdditemPageModule)
+    loadChildren: () => import('./pages/additem/additem.module').then( m => m.AdditemPageModule),
+    canActivate: [AuthGuard]
   },
 ];
 
