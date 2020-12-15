@@ -19,17 +19,16 @@ export class AuthGuard implements CanActivate {
 
     return new Promise((resolve) => {
       this.storage.getObject("token").then(
-        data => {
+        (data:any) => {
           const token = data;
-          console.log(token);
-
           if(token) {
             resolve(true);
+            console.log(token);
           } 
           else {
-            console.log(token);
             this.router.navigateByUrl("login");
             resolve(false);
+            console.log(token);
           }
         }
       );

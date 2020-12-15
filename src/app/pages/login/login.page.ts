@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
-import { LoadingController } from '@ionic/angular';
+import { LoadingController, ToastController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -31,7 +31,8 @@ export class LoginPage implements OnInit {
     private router: Router,
     private formBuilder: FormBuilder,
     private authSrv: AuthService,
-    private loadingCtrl: LoadingController
+    private loadingCtrl: LoadingController,
+    private toastCtrl: ToastController
   ) {}
 
   ngOnInit() {
@@ -56,6 +57,14 @@ export class LoginPage implements OnInit {
     return loading;
   }
 
+  async presentToast() {
+    const toast = await this.toastCtrl.create({
+      message: 'Login Success',
+      duration: 2000
+    });
+    toast.present();
+  }
+
   async loginUser(value) {
     const loading = await this.presentLoading();
 
@@ -64,6 +73,7 @@ export class LoginPage implements OnInit {
       console.log(res);
       loading.dismiss();
       this.router.navigateByUrl("home");
+      this.presentToast();
     },
     (err:any) => {
        this.errorData = err.error;

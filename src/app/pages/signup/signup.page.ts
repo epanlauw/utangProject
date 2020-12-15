@@ -3,7 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms"
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Router } from "@angular/router";
 import { Camera, CameraResultType, CameraSource, Capacitor } from '@capacitor/core';
-import { LoadingController, Platform } from '@ionic/angular';
+import { LoadingController, Platform, ToastController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -57,7 +57,8 @@ export class SignupPage implements OnInit {
     private platform: Platform,
     private formBuilder: FormBuilder,
     private authSrv: AuthService,
-    private loadingCtrl: LoadingController
+    private loadingCtrl: LoadingController,
+    private toastCtrl: ToastController
   ) {}
 
   ngOnInit() {
@@ -96,16 +97,24 @@ export class SignupPage implements OnInit {
     return loading;
   }
 
+  async presentToast() {
+    const toast = await this.toastCtrl.create({
+      message: 'Sign Up Success',
+      duration: 2000
+    });
+    toast.present();
+  }
+
   async registerUser(value) {
     const loading = await this.presentLoading();
 
-    this.gender =   value.gender[0].toUpperCase() + value.gender.slice(1);
+    //this.gender =   value.gender[0].toUpperCase() + value.gender.slice(1);
     const user = {
       first_name: value.first_name,
       last_name: value.last_name != null? value.last_name : this.lastName,
       email: value.email,
       password: value.password,
-      gender: this.gender,
+      gender: value.gender,
       date_of_birth: value.dob,
       avatar_url: this.imageUrl
     }
@@ -114,6 +123,7 @@ export class SignupPage implements OnInit {
       console.log(res);
       loading.dismiss();
       this.router.navigateByUrl("home");
+      this.presentToast();
     }, err => {
       //console.log(err.error.data);
       const error =  err.error.data;

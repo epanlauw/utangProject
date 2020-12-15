@@ -1,0 +1,145 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button routerLink="/profile"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Edit Profile</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="ion-text-center"><h1 class="montserrat">BOGA</h1></div>
+  <form [formGroup]="form" (ngSubmit)="editUser(form.value)">
+    <div class="ion-margin-top">
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-label>Photo</ion-label>
+          </ion-col>
+          <ion-col size="8">
+            <ion-button style="margin-top:0px;" size="small" (click)="getPicture('camera')">
+              <ion-icon name="camera" slot="start"></ion-icon>
+              <ion-label>Camera</ion-label>
+            </ion-button>
+            <ion-button style="margin-top:0px;" size="small" (click)="getPicture('gallery')">
+              <ion-icon name="image" slot="start"></ion-icon>
+              <ion-label>Gallery</ion-label>
+            </ion-button>
+          </ion-col>
+          <input type="file" *ngIf="isDesktop" #filePicker (change)="onFileChoose($event)" formControlName="avatar_url">
+        </ion-row>
+        <ion-row>
+          <ion-card *ngIf="imageUrl">
+            <ion-card-content>
+              <img [src]="imageUrl">
+            </ion-card-content>
+          </ion-card>
+        </ion-row>
+      </ion-grid>
+    </div>
+    <div class="ion-margin-top">
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-label>Nama Depan</ion-label>
+          </ion-col>
+          <ion-col size="8">
+            <ion-item lines="none" class="roundedInput" expand="block">
+              <ion-input type="text" formControlName="first_name" [value]="user.first_name"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <div class="validation-errors">
+            <ng-container *ngFor="let validation of validation_message.first_name">
+              <ion-text color="danger" *ngIf="form.get('first_name').hasError(validation.type) && (form.get('first_name').dirty || form.get('first_name').touched)">
+                {{validation.message}}
+              </ion-text>
+            </ng-container>
+          </div>
+        </ion-row>
+      </ion-grid>
+    </div>
+    <div class="ion-margin-top">
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-label>Nama Belakang</ion-label>
+          </ion-col>
+          <ion-col size="8">
+            <ion-item lines="none" class="roundedInput" expand="block">
+              <ion-input type="text" formControlName="last_name" [value]="user.last_name"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+    <div class="ion-margin-top">
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-label>Email</ion-label>
+          </ion-col>
+          <ion-col size="8">
+            <ion-item lines="none" class="roundedInput" expand="block">
+              <ion-input type="email" formControlName="email" disabled [value]="user.email"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <div class="ion-margin-top">
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <ion-label>Gender</ion-label>
+            </ion-col>
+            <ion-col size="8">
+              <ion-item lines="none" class="roundedInput">
+                <ion-select formControlName="gender" placeholder="Select One">
+                  <ion-select-option value="Female">Female</ion-select-option>
+                  <ion-select-option value="Male">Male</ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <div class="validation-errors">
+              <ng-container *ngFor="let validation of validation_message.gender">
+                <ion-text color="danger" *ngIf="form.get('gender').hasError(validation.type) && (form.get('gender').dirty || form.get('gender').touched)">
+                  {{validation.message}}
+                </ion-text>
+              </ng-container>
+            </div>
+          </ion-row>
+        </ion-grid>
+      </div>
+      <div class="ion-margin-top">
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <ion-label>Tanggal Lahir</ion-label>
+            </ion-col>
+            <ion-col size="8">
+              <ion-item lines="none" class="roundedInput" expand="block">
+                <ion-datetime displayFormat="DD MMMM YYYY" min="1920-01-01" max="2015-12-31" formControlName="dob" [value]="user.date_of_birth"></ion-datetime>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <div class="validation-errors">
+              <ng-container *ngFor="let validation of validation_message.dob">
+                <ion-text color="danger" *ngIf="form.get('dob').hasError(validation.type) && (form.get('dob').dirty || form.get('dob').touched)">
+                  {{validation.message}}
+                </ion-text>
+              </ng-container>
+            </div>
+          </ion-row>
+        </ion-grid>
+      </div>
+    </div>
+    <div class="ion-text-center ion-margin-top">
+      <ion-button type="submit" color="dark" size="large" [disabled]="!form.valid">Edit Profile</ion-button>
+    </div>
+  </form>
+  <br/>
+</ion-content>

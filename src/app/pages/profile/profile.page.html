@@ -7,9 +7,9 @@
 </ion-header>
 
 <ion-content>
-  <ion-img class="img-profile" src="assets/icon/Logo.png"></ion-img>
+  <ion-img class="img-profile" [src]="user.avatar_url"></ion-img>
   <div class="ion-text-center ion-margin-top">
-    <ion-button color="dark" expand="block" class="button-edit-profile">Edit Profile</ion-button>
+    <ion-button color="dark" expand="block" class="button-edit-profile" (click)="changeEdit()">Edit Profile</ion-button>
   </div>
   <div class="ion-margin-top">
     <ion-grid>
@@ -18,7 +18,7 @@
           <ion-label>Nama</ion-label>
         </ion-col>
         <ion-col>
-          <ion-label>John Tron</ion-label>
+          <ion-label>{{user.first_name}} {{user.last_name}}</ion-label>
         </ion-col>
       </ion-row>
     </ion-grid>
@@ -31,7 +31,7 @@
           <ion-label>Email</ion-label>
         </ion-col>
         <ion-col>
-          <ion-label>John@umn.ac.id</ion-label>
+          <ion-label>{{user.email}}</ion-label>
         </ion-col>
       </ion-row>
     </ion-grid>
@@ -41,10 +41,23 @@
     <ion-grid>
       <ion-row>
         <ion-col>
-          <ion-label>Telp</ion-label>
+          <ion-label>Gender</ion-label>
         </ion-col>
         <ion-col>
-          <ion-label>08973123891</ion-label>
+          <ion-label>{{user.gender}}</ion-label>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+  <div class="hr ion-justify-content-center"></div>
+  <div class="ion-margin-top">
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-label>Birthday</ion-label>
+        </ion-col>
+        <ion-col>
+          <ion-label>{{user.date_of_birth | date:'mediumDate'}}</ion-label>
         </ion-col>
       </ion-row>
     </ion-grid>
@@ -63,29 +76,4 @@
     </ion-grid>
   </div>
   <div class="hr ion-justify-content-center"></div>
-  <div class="ion-margin-top">
-    <ion-grid>
-      <ion-row [routerLink]= "['/login']">
-        <ion-col>
-          <ion-label>Change Password</ion-label>
-        </ion-col>
-        <ion-col size="2">
-          
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </div>
-  <div class="hr ion-justify-content-center"></div>
-  <div class="ion-margin-top">
-    <ion-grid>
-      <ion-row>
-        <ion-col [routerLink]= "['/login']">
-          <ion-label color="red">Delete Account</ion-label>
-        </ion-col>
-        <ion-col size="2">
-
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </div>
 </ion-content>

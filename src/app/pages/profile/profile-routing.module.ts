@@ -11,7 +11,11 @@ const routes: Routes = [
   {
     path: 'myrecipe',
     loadChildren: () => import('../../pages/myrecipe/myrecipe.module').then( m => m.MyrecipePageModule)
+  },  {
+    path: 'edit',
+    loadChildren: () => import('./edit/edit.module').then( m => m.EditPageModule)
   },
+
 ];
 
 @NgModule({
