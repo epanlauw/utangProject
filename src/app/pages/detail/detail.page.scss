@@ -32,4 +32,15 @@ ion-content {
   ion-list {
     background-color: transparent;
   }
+
+  .img-center {
+    width: 75%;
+    height: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  ion-text {
+    white-space: pre-line;
+  }
 }

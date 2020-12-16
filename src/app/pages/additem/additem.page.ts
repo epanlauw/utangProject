@@ -78,8 +78,8 @@ export class AdditemPage implements OnInit {
     this.showUser();
   }
 
-  onSubmit(value) {
-
+  async onSubmit(value) {
+    const loading = await this.presentLoading();
     const data = {
       name : value.nama,
       ingredient : value.bahan,
@@ -92,8 +92,12 @@ export class AdditemPage implements OnInit {
 
     this.recipeSrv.insertRecipe(data).then(res => {
       res.subscribe((data:any) => {
+        loading.dismiss();
         console.log(data);
         this.router.navigateByUrl('/home');
+      },err => {
+        loading.dismiss();
+        console.log(err);
       });
     });
 

@@ -64,6 +64,10 @@ export class AuthService {
     return this.api.get("detail_profile");
   }
 
+  getAllUser() {
+    return this.api.get("user");
+  }
+
   logoutUser() {
     return this.api.get("logout").then( res => res.subscribe(data => {
       console.log(data);

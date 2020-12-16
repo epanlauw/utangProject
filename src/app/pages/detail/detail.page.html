@@ -3,52 +3,21 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/home"></ion-back-button>
     </ion-buttons>
+    <ion-title class="montserrat">Recipe Detail</ion-title>
   </ion-toolbar>
 </ion-header>
-<ion-content>
-  <ion-slides pager="true">
-    <ion-slide>
-      <ion-card>
-        <ion-img src="https://ecs7.tokopedia.net/blog-tokopedia-com/uploads/2018/05/Resep-Rendang-Daging-Khas-Padang.jpg"></ion-img>
-      </ion-card>
-    </ion-slide>
-    <ion-slide>
-      <ion-card>
-        <ion-img src="https://ecs7.tokopedia.net/blog-tokopedia-com/uploads/2018/05/Resep-Rendang-Daging-Khas-Padang.jpg"></ion-img>
-      </ion-card>
-    </ion-slide>
-    <ion-slide>
-      <ion-card>
-        <ion-img src="https://ecs7.tokopedia.net/blog-tokopedia-com/uploads/2018/05/Resep-Rendang-Daging-Khas-Padang.jpg"></ion-img>
-      </ion-card>
-    </ion-slide>
-    <ion-slide>
-      <ion-card>
-        <ion-img src="https://ecs7.tokopedia.net/blog-tokopedia-com/uploads/2018/05/Resep-Rendang-Daging-Khas-Padang.jpg"></ion-img>
-      </ion-card>
-    </ion-slide>
-  </ion-slides>
-  <div class="ion-text-center"><h1 class="montserrat">Nasi Goreng</h1></div>
+<ion-content *ngIf="stateTrue == true && userTrue == true">
+  <ion-card class="img-center">
+    <ion-img [src]="recipe.image_url"></ion-img>
+  </ion-card>
+  <div class="ion-text-center"><h1 class="montserrat">{{recipe.name}}</h1></div>
   <div class="ion-text-center"><h2 class="montserrat" style="font-size: medium;">oleh Bunda Kecil</h2></div>
   <div class="hr ion-justify-content-center"></div>
   <div class="ion-margin">
     <div class="ion-text-start">
       <h1 class="montserrat">Bahan :</h1>
     </div>
-    <ion-grid>
-      <ion-row>
-        <ion-col class="montserrat">1. Bawang</ion-col>
-        <ion-col class="montserrat">2. Bawang</ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col class="montserrat">3. Bawang</ion-col>
-        <ion-col class="montserrat">4. Nasi</ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col class="montserrat">5. Nasi</ion-col>
-        <ion-col class="montserrat">6. Nasi</ion-col>
-      </ion-row>
-    </ion-grid>
+    <ion-text class="montserrat">{{recipe.ingredient}}</ion-text>
   </div>
   <div class="ion-margin-top hr ion-justify-content-center"></div>
   <div class="ion-margin">
@@ -56,17 +25,15 @@
       <h1 class="montserrat">Langkah - Langkah :</h1>
     </div>
     <ion-list class="ion-margin-left">
-      <p class="montserrat">1. Goreng...</p>
-      <p class="montserrat">2. Masukkan..</p>
-      <p class="montserrat">3. Sajikan...</p>
+      <ion-text class="montserrat">{{recipe.steps}}</ion-text>
     </ion-list>
   </div>
   <div class="ion-margin-top hr ion-justify-content-center"></div>
-  <div class="ion-text-start ion-margin-start">
-    <h2 class="montserrat">See Video Tutorial</h2>
+  <div class="ion-text-start ion-margin" *ngIf="recipe.id_user == user.id">
+    <ion-button color="dark" expand="block">Edit</ion-button>
   </div>
-  <div class="ion-margin-top hr ion-justify-content-center"></div>
-  <div class="ion-text-start ion-margin">
-    <h2 class="montserrat">Rate</h2>
+  <div class="ion-margin-top hr ion-justify-content-center" *ngIf="recipe.id_user == user.id"></div>
+  <div class="ion-text-start ion-margin" *ngIf="recipe.id_user == user.id">
+    <ion-button color="dark" expand="block">Delete</ion-button>
   </div>
 </ion-content>

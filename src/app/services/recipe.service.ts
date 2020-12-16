@@ -22,7 +22,7 @@ export class RecipeService {
   }
 
   getRecipeDetail(id_recipe:any) {
-
+    return this.apiSrv.get('recipe/' + id_recipe);
   }
 
   insertRecipe(newRecipe: any){

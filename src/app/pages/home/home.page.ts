@@ -22,6 +22,9 @@ export class HomePage {
   ) {}
   
   ionViewWillEnter() {
+    this.pRecipe = [];
+    this.fRecipe = [];
+    this.tRecipe = [];
     this.showAllRecipe();
   }
 

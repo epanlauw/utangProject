@@ -27,6 +27,8 @@ export class MyrecipePage implements OnInit {
   }
 
   ionViewWillEnter() {
+    this.types = [];
+    this.recipesUser = [];
     this.getUser();
   }
 
