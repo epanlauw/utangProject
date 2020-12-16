@@ -44,4 +44,15 @@ export class RecipeService {
   deleteRecipe(id_recipe: any){
    
   }
+
+  editRecipe(newRecipe: any, id_recipe: any){
+    const recipe = {
+      name : newRecipe.name,
+      ingredient : newRecipe.ingredient,
+      steps : newRecipe.steps,
+      image_url : newRecipe.imageUrl,
+      difficulty :newRecipe.difficulty,
+    }
+    return this.apiSrv.put('recipe/' + id_recipe, recipe);
+  }
 }

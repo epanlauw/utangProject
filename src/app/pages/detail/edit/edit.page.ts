@@ -1,20 +1,18 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Camera, CameraResultType, CameraSource, Capacitor } from '@capacitor/core';
 import { LoadingController, Platform } from '@ionic/angular';
 import { RecipeService } from 'src/app/services/recipe.service';
-import { Camera , CameraResultType, CameraSource, Capacitor} from '@capacitor/core'
-import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
-  selector: 'app-additem',
-  templateUrl: './additem.page.html',
-  styleUrls: ['./additem.page.scss'],
+  selector: 'app-edit',
+  templateUrl: './edit.page.html',
+  styleUrls: ['./edit.page.scss'],
 })
-export class AdditemPage implements OnInit {
+export class EditPage implements OnInit {
 
-  
   @ViewChild('filePicker', { static: false }) filePickerRef: ElementRef<HTMLInputElement>;
   photo: SafeResourceUrl;
   isDesktop: boolean;
@@ -22,6 +20,8 @@ export class AdditemPage implements OnInit {
   imageUrl: string = '';
   user: any;
   types: any;
+  recipe: any;
+  id:any;
 
   validation_message = {
     'nama': [
@@ -51,15 +51,22 @@ export class AdditemPage implements OnInit {
     private platform: Platform,
     private sanitizer: DomSanitizer,
     private formBuilder: FormBuilder,
-    private authSrv: AuthService,
-    private loadingCtrl: LoadingController
+    private loadingCtrl: LoadingController,
+    private activatedRoute: ActivatedRoute
   ) { }
 
   ngOnInit() {
+
     if((this.platform.is('mobile') && this.platform.is('hybrid')) || 
     this.platform.is('desktop')){
       this.isDesktop = true;
     }
+
+    this.activatedRoute.paramMap.subscribe(paramMap => {
+      if(!paramMap.has('idDetail')) {return;}
+      this.id = paramMap.get('idDetail');
+      console.log(this.id);
+    });
 
     this.form = this.formBuilder.group({
       nama: new FormControl('', Validators.compose([
@@ -71,15 +78,14 @@ export class AdditemPage implements OnInit {
       langkah: new FormControl('', Validators.compose([
         Validators.required
       ])),
-      type: new FormControl('', Validators.compose([
-        Validators.required
-      ])),
       difficulty: new FormControl('', Validators.compose([
         Validators.required
       ]))
     });
+  }
 
-    this.showUser();
+  ionViewWillEnter() {
+    this.showRecipe();
   }
 
   async onSubmit(value) {
@@ -90,46 +96,34 @@ export class AdditemPage implements OnInit {
       steps : value.langkah,
       imageUrl : this.imageUrl,
       difficulty : value.difficulty,
-      id_user : this.user.id,
-      id_type : value.type
     }
 
-    this.recipeSrv.insertRecipe(data).then(res => {
+    console.log(data);
+
+    this.recipeSrv.editRecipe(data, this.id).then(res => {
       res.subscribe((data:any) => {
-        loading.dismiss();
         console.log(data);
-        this.router.navigateByUrl('/home');
-      },err => {
-        const error =  err.error.data;
-        if(error.image_url) {
-          this.errors_message.photo = ["Required Photo"];
-        }
-        console.log(this.errors_message);
         loading.dismiss();
+        this.router.navigate(['/detail/', this.id]);
       });
-    });
-
-    this.form.reset();
-    this.imageUrl = '';
+    })
   }
 
-  async showUser() {
+  async showRecipe() {
     const loading = await this.presentLoading();
-    this.authSrv.getUser().then(res => {
+
+    this.recipeSrv.getRecipeDetail(this.id).then(res => {
       res.subscribe((data:any) => {
         loading.dismiss();
-        this.user = data.data.user;
-        this.showType();
-        console.log(this.user);
-      })
-    });
-  }
-
-  async showType() {
-    this.recipeSrv.getAllType().then(res => {
-      res.subscribe((data:any) => {
-        console.log(data);
-        this.types = data.data.type;
+        this.recipe = data.data.recipe;
+        console.log(this.recipe);
+        this.imageUrl = this.recipe.image_url;
+        this.form.setValue({
+          nama: this.recipe.name, 
+          bahan: this.recipe.ingredient,
+          langkah: this.recipe.steps,
+          difficulty: this.recipe.difficulty
+        });
       });
     });
   }

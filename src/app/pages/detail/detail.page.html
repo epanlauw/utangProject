@@ -30,7 +30,7 @@
   </div>
   <div class="ion-margin-top hr ion-justify-content-center"></div>
   <div class="ion-text-start ion-margin" *ngIf="recipe.id_user == user.id">
-    <ion-button color="dark" expand="block">Edit</ion-button>
+    <ion-button color="dark" expand="block" [routerLink]="['./','edit']">Edit</ion-button>
   </div>
   <div class="ion-margin-top hr ion-justify-content-center" *ngIf="recipe.id_user == user.id"></div>
   <div class="ion-text-start ion-margin" *ngIf="recipe.id_user == user.id">

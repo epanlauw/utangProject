@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
 import { RecipeService } from 'src/app/services/recipe.service';
@@ -23,7 +23,8 @@ export class DetailPage implements OnInit {
     private recipeSrv: RecipeService,
     private authSrv: AuthService,
     private loadingCtrl: LoadingController,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private router: Router
   ) { }
 
   ngOnInit() {    
@@ -40,6 +41,10 @@ export class DetailPage implements OnInit {
     this.getUser();
     this.getRecipeDetail();
   } 
+
+  async deleteRecipe() {
+
+  }
 
   async getRecipeDetail() {
     const loading =  await this.presentLoading();

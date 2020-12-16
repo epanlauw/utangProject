@@ -27,6 +27,7 @@ export class EditPage implements OnInit {
       { type: 'required', message: 'Date of Birth is required'},
     ]
   }
+  
   constructor(
     private authSrv: AuthService,
     private loadingCtrl: LoadingController,
