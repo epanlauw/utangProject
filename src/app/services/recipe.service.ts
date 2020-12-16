@@ -21,8 +21,20 @@ export class RecipeService {
 
   }
 
-  insertRecipe(newInsert: any){
-    
+  insertRecipe(newRecipe: any){
+    const recipe = {
+      name : newRecipe.name,
+      ingredient : newRecipe.ingredient,
+      steps : newRecipe.steps,
+      image_url : newRecipe.imageUrl,
+      difficulty :newRecipe.difficulty,
+      id_user : newRecipe.id_user,
+      id_type : newRecipe.id_type
+    }
+
+    //console.log(recipe);
+
+    return this.apiSrv.post('add_recipe', recipe);
   }
 
   deleteRecipe(id_recipe: any){

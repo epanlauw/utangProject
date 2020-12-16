@@ -29,7 +29,7 @@ ion-content {
     background: rgba(128, 128, 128, 0.5);
     ion-card-title {
       --color: #fff;
-      margin-top: 10%;
+      margin-top: 25%;
     }
   }
 
@@ -47,5 +47,34 @@ ion-content {
     display: block;
     margin-left: auto;
     margin-right: auto;
+  }
+
+  form {
+    margin-top: 30px;
+
+    .roundedInput {
+      --border-radius: 50px;
+      --highlight-height: 0;
+      --background: #fff;
+      --min-height: 16px;
+      box-shadow: 1px 8px 8px 0px rgba(0, 0, 0, 0.08);
+
+      ion-input {
+        --padding-top: 5px;
+        --padding-bottom: 5px;
+      }
+    }
+
+    .littleRoundedInput {
+      --border-radius: 10px;
+      --highlight-height: 0;
+      --background: #fff;
+      --min-height: 16px;
+      box-shadow: 1px 8px 8px 0px rgba(0, 0, 0, 0.08);
+    }
+
+    ion-button {
+      margin-top: 30px;
+    }
   }
 }

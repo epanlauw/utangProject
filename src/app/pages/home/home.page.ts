@@ -10,6 +10,7 @@ import { RecipeService } from 'src/app/services/recipe.service';
 export class HomePage {
   
   recipes: any;
+  pRecipe: any[] = [];
   fRecipe: any[] = [];
   tRecipe: any[] = [];
   types: any;
@@ -18,7 +19,7 @@ export class HomePage {
     private loadingCtrl: LoadingController
   ) {}
   
-  ngOnInit() {
+  ionViewWillEnter() {
     this.showAllRecipe();
   }
 
@@ -39,7 +40,10 @@ export class HomePage {
         loading.dismiss();
         this.recipes = data.data.recipes;
         this.showAllTypes();
-        //console.log(this.recipes);
+
+        console.log(this.recipes);
+        
+        this.popularRecipe();
         this.featuredRecipe();
       });
     });
@@ -57,6 +61,11 @@ export class HomePage {
     for(let i = 0; i < 3; i++) {
       this.fRecipe.push(this.recipes[i]);
     }
-    //console.log(this.fRecipe);
+  }
+
+  popularRecipe() {
+    for(let i = 0; i < 10; i++) {
+      this.pRecipe.push(this.recipes[i]);
+    }
   }
 }

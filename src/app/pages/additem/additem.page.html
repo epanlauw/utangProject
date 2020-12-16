@@ -11,58 +11,139 @@
     <h1 class="montserrat">BOGA</h1>
   </div>
   <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
-    <ion-card class="img-75 img-center">
-      <ion-img src="https://ecs7.tokopedia.net/blog-tokopedia-com/uploads/2018/05/Resep-Rendang-Daging-Khas-Padang.jpg" ></ion-img>
+    <ion-card *ngIf="!imageUrl" class="img-75 img-center"  (click)="getPicture('camera')">
+      <ion-img src="https://mtsn4malang.sch.id/wp-content/uploads/2019/08/placeholder-1.png" ></ion-img>
       <div class="overlay">
         <ion-card-title class="ion-text-center"><ion-icon name="add-circle-outline"></ion-icon></ion-card-title>
       </div>
     </ion-card>
+    <ion-card *ngIf="imageUrl">
+      <ion-card-content>
+        <img [src]="imageUrl">
+      </ion-card-content>
+    </ion-card>
     <div class="ion-margin-top">
-      <ion-label class="montserrat ion-margin-left">Nama Resep</ion-label>
-      <ion-item> 
-        <ion-input type="text" formControlName="nama"></ion-input>
-      </ion-item>
+      <ion-row>
+        <ion-col>
+          <ion-label>Nama Resep</ion-label>
+        </ion-col>
+        <ion-col size="8">
+          <ion-item lines="none" class="roundedInput" expand="block">
+            <ion-input type="text" formControlName="nama"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <div class="validation-errors">
+          <ng-container *ngFor="let validation of validation_message.nama">
+            <ion-text color="danger" *ngIf="form.get('nama').hasError(validation.type) && (form.get('nama').dirty || form.get('nama').touched)">
+              {{validation.message}}
+            </ion-text>
+          </ng-container>
+        </div>
+      </ion-row>
     </div>
-    <div class="ion-margin-top">
-      <ion-label class="montserrat ion-margin-left">Bahan</ion-label>
-      <ion-item> 
-        <ion-textarea formControlName="bahan"></ion-textarea>
-      </ion-item>
-    </div>
-    <div class="ion-margin-top">
-      <ion-label class="montserrat ion-margin-left">Langkah - Langkah</ion-label>
-      <ion-item> 
-        <ion-textarea formControlName="langkah"></ion-textarea>
-      </ion-item>
-    </div>
-    <div class="ion-margin-top">
-      <ion-label class="montserrat ion-margin-left">Url Video</ion-label>
-      <ion-item> 
-        <ion-input color="dark" type="text" formControlName="url"></ion-input>
-      </ion-item>
-    </div>
-    <div class="ion-margin-top">
-      <ion-label class="montserrat ion-margin-left">Gambar Recipe</ion-label>
-      <ion-item> 
-        <ion-button size="small" (click)="getPicture('camera')">
-          <ion-icon name="camera" slot="start"></ion-icon>
-          <ion-label>Camera</ion-label>
-        </ion-button>
     
-        <ion-button size="small" (click)="getPicture('gallery')">
-          <ion-icon name="image" slot="start"></ion-icon>
-          <ion-label>Gallery</ion-label>
-        </ion-button>
-    
-        <input type="file" *ngIf="isDesktop" #filePicker (change)="onFileChoose($event)"/>
-
-        <ion-card *ngIf="photo">
-          <ion-card-content>
-            <img [src]="photo">
-          </ion-card-content>
-        </ion-card>
-      </ion-item>
+    <div class="ion-margin-top">
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-label>Kategori</ion-label>
+          </ion-col>
+          <ion-col size="8">
+            <ion-item lines="none" class="roundedInput">
+              <ion-select formControlName="type" placeholder="Pilih Salah Satu">
+                <ion-select-option [value]="type.id"  *ngFor="let type of types">{{type.name}}</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <div class="validation-errors">
+            <ng-container *ngFor="let validation of validation_message.type">
+              <ion-text color="danger" *ngIf="form.get('type').hasError(validation.type) && (form.get('type').dirty || form.get('type').touched)">
+                {{validation.message}}
+              </ion-text>
+            </ng-container>
+          </div>
+        </ion-row>
+      </ion-grid>
     </div>
-    <ion-button type="submit" color="dark" expand="block">Submit</ion-button>
+    <div class="ion-margin-top">
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-label>Tingkat Kesulitan</ion-label>
+          </ion-col>
+          <ion-col size="8">
+            <ion-item lines="none" class="roundedInput">
+              <ion-select formControlName="difficulty" placeholder="Pilih Salah Satu">
+                <ion-select-option value="Super Simple">Sangat Mudah</ion-select-option>
+                <ion-select-option value="Fairly Easy">Cukup Mudah</ion-select-option>
+                <ion-select-option value="Average">Sedang</ion-select-option>
+                <ion-select-option value="Hard">Susah</ion-select-option>
+                <ion-select-option value="Very Difficult">Sangat Susah</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <div class="validation-errors">
+            <ng-container *ngFor="let validation of validation_message.type">
+              <ion-text color="danger" *ngIf="form.get('difficulty').hasError(validation.type) && (form.get('difficulty').dirty || form.get('difficulty').touched)">
+                {{validation.message}}
+              </ion-text>
+            </ng-container>
+          </div>
+        </ion-row>
+      </ion-grid>
+    </div>
+    <div class="ion-margin-top">
+      <ion-row>
+        <ion-col>
+          <ion-label>Bahan - Bahan</ion-label>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item lines="none" class="littleRoundedInput" expand="block">
+            <ion-textarea auto-grow="true" formControlName="bahan"></ion-textarea>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <div class="validation-errors">
+          <ng-container *ngFor="let validation of validation_message.bahan">
+            <ion-text color="danger" *ngIf="form.get('bahan').hasError(validation.type) && (form.get('bahan').dirty || form.get('bahan').touched)">
+              {{validation.message}}
+            </ion-text>
+          </ng-container>
+        </div>
+      </ion-row>
+    </div>
+    <div class="ion-margin-top">
+      <ion-row>
+        <ion-col>
+          <ion-label>Langkah - Langkah</ion-label>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item lines="none" class="littleRoundedInput" expand="block">
+            <ion-textarea auto-grow="true" formControlName="langkah"></ion-textarea>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <div class="validation-errors">
+          <ng-container *ngFor="let validation of validation_message.langkah">
+            <ion-text color="danger" *ngIf="form.get('langkah').hasError(validation.type) && (form.get('langkah').dirty || form.get('langkah').touched)">
+              {{validation.message}}
+            </ion-text>
+          </ng-container>
+        </div>
+      </ion-row>
+    </div>
+    <ion-button type="submit" color="dark" expand="block" [disabled]="!form.valid">Submit</ion-button>
   </form> 
 </ion-content>

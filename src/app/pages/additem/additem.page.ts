@@ -1,10 +1,11 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { Platform } from '@ionic/angular';
+import { LoadingController, Platform } from '@ionic/angular';
 import { RecipeService } from 'src/app/services/recipe.service';
 import { Camera , CameraResultType, CameraSource, Capacitor} from '@capacitor/core'
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-additem',
@@ -18,10 +19,13 @@ export class AdditemPage implements OnInit {
   photo: SafeResourceUrl;
   isDesktop: boolean;
   form: FormGroup;
+  imageUrl: string = '';
+  user: any;
+  types: any;
 
   validation_message = {
     'nama': [
-      { type: 'required', message: 'Recipe Title is required'},
+      { type: 'required', message: 'Nama Resep is required'},
     ],
     'bahan': [
       { type: 'required', message: 'Bahan-Bahan is required'},
@@ -29,17 +33,22 @@ export class AdditemPage implements OnInit {
     'langkah': [
       { type: 'required', message: 'Langkah-Langkah is required'},
     ],
-    'url': [
-      { type: 'required', message: 'URL is required'},
+    'type': [
+      { type: 'required', message: 'Tipe is required'},
+    ],
+    'difficulty': [
+      { type: 'required', message: 'Tingkat Kesulitan is required'},
     ]
   }
 
   constructor(
     private router: Router, 
-    private recSrv: RecipeService,
+    private recipeSrv: RecipeService,
     private platform: Platform,
     private sanitizer: DomSanitizer,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private authSrv: AuthService,
+    private loadingCtrl: LoadingController
   ) { }
 
   ngOnInit() {
@@ -58,26 +67,70 @@ export class AdditemPage implements OnInit {
       langkah: new FormControl('', Validators.compose([
         Validators.required
       ])),
-      url: new FormControl(null, {
-        validators: [Validators.required]
+      type: new FormControl('', Validators.compose([
+        Validators.required
+      ])),
+      difficulty: new FormControl('', Validators.compose([
+        Validators.required
+      ]))
+    });
+
+    this.showUser();
+  }
+
+  onSubmit(value) {
+
+    const data = {
+      name : value.nama,
+      ingredient : value.bahan,
+      steps : value.langkah,
+      imageUrl : this.imageUrl,
+      difficulty : value.difficulty,
+      id_user : this.user.id,
+      id_type : value.type
+    }
+
+    this.recipeSrv.insertRecipe(data).then(res => {
+      res.subscribe((data:any) => {
+        console.log(data);
+        this.router.navigateByUrl('/home');
+      });
+    });
+
+    this.form.reset();
+    this.imageUrl = '';
+  }
+
+  async showUser() {
+    const loading = await this.presentLoading();
+    this.authSrv.getUser().then(res => {
+      res.subscribe((data:any) => {
+        loading.dismiss();
+        this.user = data.data.user;
+        this.showType();
+        console.log(this.user);
       })
     });
   }
 
-  onSubmit(value){
-    console.log(value);
-    const data = {
-      nama : value.nama,
-      bahan : value.bahan,
-      langkah : value.langkah,
-      url : value.url,
-      imageUrl : this.photo
-    }
-    console.log(data);
-    this.recSrv.insertRecipe(data);
-    this.form.reset();
-    this.router.navigateByUrl('/home');
+  async showType() {
+    this.recipeSrv.getAllType().then(res => {
+      res.subscribe((data:any) => {
+        console.log(data);
+        this.types = data.data.type;
+      });
+    });
   }
+
+  async presentLoading() {
+    const loading = await this.loadingCtrl.create({
+      message: 'Please wait...'
+    });
+
+    loading.present();
+    return loading;
+  }
+
 
   async getPicture(type: string){
     if(!Capacitor.isPluginAvailable('Camera') || (this.isDesktop && type === 'gallery')){
@@ -93,6 +146,7 @@ export class AdditemPage implements OnInit {
     });
 
     this.photo = this.sanitizer.bypassSecurityTrustResourceUrl(image && (image.dataUrl));
+    this.imageUrl = image.dataUrl;
   }
 
   onFileChoose(event: Event){

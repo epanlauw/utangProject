@@ -22,7 +22,7 @@
     <!-- nanti looping disini -->
     <ion-row>
       <div class="scrolling-wrapper">
-        <ion-col size="4" *ngFor="let recipe of recipes">
+        <ion-col size="4" *ngFor="let recipe of pRecipe">
           <ion-card class="img-fixed-feature">
             <ion-img [src]="recipe.image_url" ></ion-img>            
             <div class="overlay">
@@ -32,8 +32,6 @@
         </ion-col>
       </div>
     </ion-row>
-    
-    
   </ion-grid>
   <div class="hr ion-justify-content-center"></div>
   <div class="ion-text-start ion-margin-start">
@@ -44,8 +42,8 @@
     <ion-row>
       <ion-col size="4" *ngFor="let type of types">
         <ion-card class="img-75" [routerLink]= "['/kategori']">
-          <ion-img *ngIf="type.id == 1" src="https://cdn.idntimes.com/content-images/post/20160718/12-cb5a9e4df7319ccfc4aa098077660e85.jpg" ></ion-img>
-          <ion-img *ngIf="type.id == 2" src="https://i.pinimg.com/originals/6c/93/dd/6c93dddc4ff2722dc0c2fc1a2cc7082a.jpg" ></ion-img>
+          <ion-img *ngIf="type.id == 1" src="assets/icon/makanan_berat.jpg" ></ion-img>
+          <ion-img *ngIf="type.id == 2" src="assets/icon/makanan_ringan.jpg" ></ion-img>
           <div class="overlay">
             <ion-card-subtitle class="ion-text-center montserrat">{{type.name}}</ion-card-subtitle>
           </div>

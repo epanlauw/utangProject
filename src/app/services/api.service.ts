@@ -44,6 +44,20 @@ export class ApiService {
     
   }
 
+  async post(type:string, data:object) {
+    return await this.storage.getObject("token").then((res:any) => {
+      this.options = {
+        headers: new HttpHeaders({
+          'Authorization': "Bearer " + res.data.token,
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        }),
+      }
+
+      return this.http.post(this.getPath(type), data ,this.options);
+    });
+  }
+
   async put(type:string, data: object) {
     return await this.storage.getObject("token").then((res:any) => {
       this.options = {
