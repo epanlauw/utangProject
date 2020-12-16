@@ -1,7 +1,7 @@
 <ion-header class="ion-no-border">
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button routerLink="/home"></ion-back-button>
+      <ion-menu-button menu="recipesMenu"></ion-menu-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -65,7 +65,7 @@
   <div class="hr ion-justify-content-center"></div>
   <div class="ion-margin-top">
     <ion-grid>
-      <ion-row [routerLink]= "['/login']">
+      <ion-row routerLink= "myrecipe">
         <ion-col>
           <ion-label>My Recipes</ion-label>
         </ion-col>

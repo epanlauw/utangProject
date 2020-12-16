@@ -13,3 +13,13 @@ ion-list {
   margin-left: auto;
   margin-right: auto;
 }
+
+ion-card {
+  width: 150px;
+  height: 150px;
+
+  ion-img {
+    object-fit: cover;
+    display: inline;
+  }
+}

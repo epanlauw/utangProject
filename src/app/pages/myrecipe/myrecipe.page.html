@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/profile"></ion-back-button>
     </ion-buttons>
-    <ion-title class="montserrat">BOGA</ion-title>
+    <ion-title class="montserrat">My Recipe</ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="changeGrid()" *ngIf="list == true">
         <ion-icon name="grid"></ion-icon>
@@ -15,9 +15,9 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <app-list *ngIf="list == true"></app-list>
-  <app-grid *ngIf="grid == true"></app-grid>
+<ion-content *ngIf="recipesUser">
+  <app-list [types]="types" [recipesUser]="recipesUser" *ngIf="list == true"></app-list>
+  <app-grid [types]="types" [recipesUser]="recipesUser" *ngIf="grid == true"></app-grid>
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button>
       <ion-icon name="filter"></ion-icon>

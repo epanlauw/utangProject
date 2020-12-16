@@ -9,7 +9,7 @@
   <div class="ion-text-center"><h2 class="montserrat">Featured Recipes</h2></div>
   <ion-slides pager="true">
     <ion-slide *ngFor="let recipe of fRecipe">
-      <ion-card class="img-fixed-slide" [routerLink]= "['/detail']" >
+      <ion-card class="img-fixed-slide" [routerLink]="['/detail/',recipe.id]">
         <ion-img class="img-fixed-slide" [src]="recipe.image_url"></ion-img>
       </ion-card>
     </ion-slide>
@@ -23,12 +23,14 @@
     <ion-row>
       <div class="scrolling-wrapper">
         <ion-col size="4" *ngFor="let recipe of pRecipe">
-          <ion-card class="img-fixed-feature">
-            <ion-img [src]="recipe.image_url" ></ion-img>            
-            <div class="overlay">
-              <ion-card-subtitle class="ion-text-center montserrat">{{recipe.name}}</ion-card-subtitle>
-            </div>
-          </ion-card>
+          <div [routerLink]="['/detail/',recipe.id]" style="height:79px; width: 82px;">
+            <ion-card class="img-fixed-feature">
+              <ion-img [src]="recipe.image_url" ></ion-img>            
+              <div class="overlay">
+                <ion-card-subtitle class="ion-text-center montserrat">{{recipe.name}}</ion-card-subtitle>
+              </div>
+            </ion-card>
+          </div>
         </ion-col>
       </div>
     </ion-row>
