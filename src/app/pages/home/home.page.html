@@ -8,24 +8,9 @@
 <ion-content>
   <div class="ion-text-center"><h2 class="montserrat">Featured Recipes</h2></div>
   <ion-slides pager="true">
-    <ion-slide>
-      <ion-card [routerLink]= "['/detail']" >
-        <ion-img src="https://ecs7.tokopedia.net/blog-tokopedia-com/uploads/2018/05/Resep-Rendang-Daging-Khas-Padang.jpg"></ion-img>
-      </ion-card>
-    </ion-slide>
-    <ion-slide>
-      <ion-card [routerLink]= "['/detail']">
-        <ion-img src="https://ecs7.tokopedia.net/blog-tokopedia-com/uploads/2018/05/Resep-Rendang-Daging-Khas-Padang.jpg"></ion-img>
-      </ion-card>
-    </ion-slide>
-    <ion-slide>
-      <ion-card [routerLink]= "['/detail']">
-        <ion-img src="https://ecs7.tokopedia.net/blog-tokopedia-com/uploads/2018/05/Resep-Rendang-Daging-Khas-Padang.jpg"></ion-img>
-      </ion-card>
-    </ion-slide>
-    <ion-slide>
-      <ion-card [routerLink]= "['/detail']">
-        <ion-img src="https://ecs7.tokopedia.net/blog-tokopedia-com/uploads/2018/05/Resep-Rendang-Daging-Khas-Padang.jpg"></ion-img>
+    <ion-slide *ngFor="let recipe of fRecipe">
+      <ion-card class="img-fixed-slide" [routerLink]= "['/detail']" >
+        <ion-img class="img-fixed-slide" [src]="recipe.image_url"></ion-img>
       </ion-card>
     </ion-slide>
   </ion-slides>
@@ -36,57 +21,19 @@
   <ion-grid>
     <!-- nanti looping disini -->
     <ion-row>
-      <ion-col>
-        <ion-card class="img-75">
-          <ion-img src="https://i0.wp.com/resepkoki.id/wp-content/uploads/2017/03/Resep-Putu-bambu.jpg?fit=2322%2C2322&ssl=1" ></ion-img>            
-          <div class="overlay">
-            <ion-card-title class="ion-text-center montserrat">Kue Putu</ion-card-title>
-          </div>
-        </ion-card>
-      </ion-col>
-      <ion-col>
-        <ion-card class="img-75">
-          <ion-img src="https://i0.wp.com/resepkoki.id/wp-content/uploads/2017/03/Resep-Putu-bambu.jpg?fit=2322%2C2322&ssl=1" ></ion-img>
-          <div class="overlay">
-            <ion-card-title class="ion-text-center montserrat">Kue Putu</ion-card-title>
-          </div>
-        </ion-card>
-      </ion-col>
-      <ion-col>
-        <ion-card class="img-75">
-          <ion-img src="https://i0.wp.com/resepkoki.id/wp-content/uploads/2017/03/Resep-Putu-bambu.jpg?fit=2322%2C2322&ssl=1" ></ion-img>
-          <div class="overlay">
-            <ion-card-title class="ion-text-center montserrat">Kue Putu</ion-card-title>
-          </div>
-        </ion-card>
-      </ion-col>
+      <div class="scrolling-wrapper">
+        <ion-col size="4" *ngFor="let recipe of recipes">
+          <ion-card class="img-fixed-feature">
+            <ion-img [src]="recipe.image_url" ></ion-img>            
+            <div class="overlay">
+              <ion-card-subtitle class="ion-text-center montserrat">{{recipe.name}}</ion-card-subtitle>
+            </div>
+          </ion-card>
+        </ion-col>
+      </div>
     </ion-row>
-    <ion-row>
-      <ion-col>
-        <ion-card class="img-75">
-          <ion-img src="https://i0.wp.com/resepkoki.id/wp-content/uploads/2017/03/Resep-Putu-bambu.jpg?fit=2322%2C2322&ssl=1" ></ion-img>
-          <div class="overlay">
-            <ion-card-title class="ion-text-center montserrat">Kue Putu</ion-card-title>
-          </div>
-        </ion-card>
-      </ion-col>
-      <ion-col>
-        <ion-card class="img-75">
-          <ion-img src="https://i0.wp.com/resepkoki.id/wp-content/uploads/2017/03/Resep-Putu-bambu.jpg?fit=2322%2C2322&ssl=1" ></ion-img>
-          <div class="overlay">
-            <ion-card-title class="ion-text-center montserrat">Kue Putu</ion-card-title>
-          </div>
-        </ion-card>
-      </ion-col>
-      <ion-col>
-        <ion-card class="img-75">
-          <ion-img src="https://i0.wp.com/resepkoki.id/wp-content/uploads/2017/03/Resep-Putu-bambu.jpg?fit=2322%2C2322&ssl=1" ></ion-img>
-          <div class="overlay">
-            <ion-card-title class="ion-text-center montserrat">Kue Putu</ion-card-title>
-          </div>
-        </ion-card>
-      </ion-col>
-    </ion-row>
+    
+    
   </ion-grid>
   <div class="hr ion-justify-content-center"></div>
   <div class="ion-text-start ion-margin-start">
@@ -95,53 +42,12 @@
   <ion-grid>
     <!-- nanti looping disini -->
     <ion-row>
-      <ion-col>
+      <ion-col size="4" *ngFor="let type of types">
         <ion-card class="img-75" [routerLink]= "['/kategori']">
-          <ion-img src="https://i0.wp.com/resepkoki.id/wp-content/uploads/2017/03/Resep-Putu-bambu.jpg?fit=2322%2C2322&ssl=1" ></ion-img>
+          <ion-img *ngIf="type.id == 1" src="https://cdn.idntimes.com/content-images/post/20160718/12-cb5a9e4df7319ccfc4aa098077660e85.jpg" ></ion-img>
+          <ion-img *ngIf="type.id == 2" src="https://i.pinimg.com/originals/6c/93/dd/6c93dddc4ff2722dc0c2fc1a2cc7082a.jpg" ></ion-img>
           <div class="overlay">
-            <ion-card-title class="ion-text-center montserrat">Kue Putu</ion-card-title>
-          </div>
-        </ion-card>
-      </ion-col>
-      <ion-col>
-        <ion-card class="img-75">
-          <ion-img src="https://i0.wp.com/resepkoki.id/wp-content/uploads/2017/03/Resep-Putu-bambu.jpg?fit=2322%2C2322&ssl=1" ></ion-img>
-          <div class="overlay">
-            <ion-card-title class="ion-text-center montserrat">Kue Putu</ion-card-title>
-          </div>
-        </ion-card>
-      </ion-col>
-      <ion-col>
-        <ion-card class="img-75">
-          <ion-img src="https://i0.wp.com/resepkoki.id/wp-content/uploads/2017/03/Resep-Putu-bambu.jpg?fit=2322%2C2322&ssl=1" ></ion-img>
-          <div class="overlay">
-            <ion-card-title class="ion-text-center montserrat">Kue Putu</ion-card-title>
-          </div>
-        </ion-card>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col>
-        <ion-card class="img-75">
-          <ion-img src="https://i0.wp.com/resepkoki.id/wp-content/uploads/2017/03/Resep-Putu-bambu.jpg?fit=2322%2C2322&ssl=1" ></ion-img>
-          <div class="overlay">
-            <ion-card-title class="ion-text-center montserrat">Kue Putu</ion-card-title>
-          </div>
-        </ion-card>
-      </ion-col>
-      <ion-col>
-        <ion-card class="img-75">
-          <ion-img src="https://i0.wp.com/resepkoki.id/wp-content/uploads/2017/03/Resep-Putu-bambu.jpg?fit=2322%2C2322&ssl=1" ></ion-img>
-          <div class="overlay">
-            <ion-card-title class="ion-text-center montserrat">Kue Putu</ion-card-title>
-          </div>
-        </ion-card>
-      </ion-col>
-      <ion-col>
-        <ion-card class="img-75">
-          <ion-img src="https://i0.wp.com/resepkoki.id/wp-content/uploads/2017/03/Resep-Putu-bambu.jpg?fit=2322%2C2322&ssl=1" ></ion-img>
-          <div class="overlay">
-            <ion-card-title class="ion-text-center montserrat">Kue Putu</ion-card-title>
+            <ion-card-subtitle class="ion-text-center montserrat">{{type.name}}</ion-card-subtitle>
           </div>
         </ion-card>
       </ion-col>

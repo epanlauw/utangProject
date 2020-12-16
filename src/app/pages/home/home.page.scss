@@ -5,7 +5,7 @@ ion-header {
 }
 ion-content {
   --background: var(--boga-background);
-  
+
   .montserrat {
     font-weight: bold;
     font-family: "Montserrat";
@@ -39,6 +39,25 @@ ion-content {
     border-radius: 15px;
   }
 
+  .img-fixed-feature {
+    border: 0.5px solid rgba(0, 0, 0, 0.7);
+    width: 82px;
+    height: 79px;
+    margin-bottom: 0px;
+    border-radius: 15px;
+  }
+
+  .img-fixed-slide {
+    border: 0.5px solid rgba(0, 0, 0, 0.7);
+    width: 250px;
+    height: 200px;
+    margin-bottom: 0px;
+    border-radius: 15px;
+    ion-img {
+      object-fit: cover;
+    }
+  }
+
   .overlay {
     width: 100%;
     height: 100%;
@@ -46,9 +65,27 @@ ion-content {
     z-index: 99;
     bottom: 0px;
     background: rgba(128, 128, 128, 0.5);
+    ion-card-subtitle {
+      --color: #fff;
+      margin-top: 30%;
+    }
     ion-card-title {
       --color: #fff;
       margin-top: 10%;
+    }
+  }
+
+  .scrolling-wrapper {
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+
+    ion-col {
+      display: inline-block;
+      ion-img {
+        object-fit: fill;
+        display: inline;
+      }
     }
   }
 }

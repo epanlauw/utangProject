@@ -57,4 +57,18 @@ export class ApiService {
       return this.http.put(this.getPath(type), data ,this.options);
     });
   }
+
+  async delete(type:string) {
+    return await this.storage.getObject("token").then((res:any) => {
+      this.options = {
+        headers: new HttpHeaders({
+          'Authorization': "Bearer " + res.data.token,
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        }),
+      }
+
+      return this.http.delete(this.getPath(type), this.options);
+    });
+  }
 }
