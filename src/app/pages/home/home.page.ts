@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
 import { RecipeService } from 'src/app/services/recipe.service';
 
@@ -16,7 +17,8 @@ export class HomePage {
   types: any;
   constructor(
     private recipeSrv: RecipeService,
-    private loadingCtrl: LoadingController
+    private loadingCtrl: LoadingController,
+    private router: Router,
   ) {}
   
   ionViewWillEnter() {
@@ -67,5 +69,9 @@ export class HomePage {
     for(let i = 0; i < 10; i++) {
       this.pRecipe.push(this.recipes[i]);
     }
+  }
+
+  changeToKategori(typeId) {
+    this.router.navigate(['/kategori/', typeId]);
   }
 }

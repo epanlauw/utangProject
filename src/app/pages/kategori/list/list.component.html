@@ -1,77 +1,18 @@
-<ion-grid>
-  <ion-row>
+<ion-grid *ngFor="let recipe of recipeType">
+  <ion-row [routerLink]="['/detail/',recipe.id]">
     <ion-col>
       <ion-card>
-        <ion-img src="https://upload.wikimedia.org/wikipedia/commons/2/28/Bakso_mi_bihun.jpg"></ion-img>
+        <ion-img [src]="recipe.image_url"></ion-img>
       </ion-card>
     </ion-col>
     <ion-col>
       <ion-list>
-        <h3>Basko</h3>
-        <h5>Makanan Berat</h5>
-        <ion-icon name="star"></ion-icon>
-        <ion-icon name="star"></ion-icon>
-        <ion-icon name="star"></ion-icon>
-        <ion-icon name="star"></ion-icon>
-        <ion-icon name="star"></ion-icon>
+        <h3>{{recipe.name}}</h3>
+        <ng-container *ngFor="let type of types">
+          <h5 *ngIf="recipe.id_type == type.id">{{type.name}}</h5>
+        </ng-container>
       </ion-list>
     </ion-col>
   </ion-row>
   <div class="ion-margin-top hr ion-justify-content-center"></div>
-  <ion-row>
-    <ion-col>
-      <ion-card>
-        <ion-img src="https://upload.wikimedia.org/wikipedia/commons/2/28/Bakso_mi_bihun.jpg"></ion-img>
-      </ion-card>
-    </ion-col>
-    <ion-col>
-      <ion-list>
-        <h3>Basko</h3>
-        <h5>Makanan Berat</h5>
-        <ion-icon name="star"></ion-icon>
-        <ion-icon name="star"></ion-icon>
-        <ion-icon name="star"></ion-icon>
-        <ion-icon name="star"></ion-icon>
-        <ion-icon name="star"></ion-icon>
-      </ion-list>
-    </ion-col>
-  </ion-row>
-  <div class="ion-margin-top hr ion-justify-content-center"></div>
-  <ion-row>
-    <ion-col>
-      <ion-card>
-        <ion-img src="https://upload.wikimedia.org/wikipedia/commons/2/28/Bakso_mi_bihun.jpg"></ion-img>
-      </ion-card>
-    </ion-col>
-    <ion-col>
-      <ion-list>
-        <h3>Basko</h3>
-        <h5>Makanan Berat</h5>
-        <ion-icon name="star"></ion-icon>
-        <ion-icon name="star"></ion-icon>
-        <ion-icon name="star"></ion-icon>
-        <ion-icon name="star"></ion-icon>
-        <ion-icon name="star"></ion-icon>
-      </ion-list>
-    </ion-col>
-  </ion-row>
-  <div class="ion-margin-top hr ion-justify-content-center"></div>
-  <ion-row>
-    <ion-col>
-      <ion-card>
-        <ion-img src="https://upload.wikimedia.org/wikipedia/commons/2/28/Bakso_mi_bihun.jpg"></ion-img>
-      </ion-card>
-    </ion-col>
-    <ion-col>
-      <ion-list>
-        <h3>Basko</h3>
-        <h5>Makanan Berat</h5>
-        <ion-icon name="star"></ion-icon>
-        <ion-icon name="star"></ion-icon>
-        <ion-icon name="star"></ion-icon>
-        <ion-icon name="star"></ion-icon>
-        <ion-icon name="star"></ion-icon>
-      </ion-list>
-    </ion-col>
-  </ion-row>
 </ion-grid>

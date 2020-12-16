@@ -16,9 +16,9 @@
 </ion-header>
 
 <ion-content>
-  <div class="ion-text-center"><h2 class="montserrat" style="font-weight: bold;">Kategori: Makanan Siang</h2></div>
-  <app-list *ngIf="list == true"></app-list>
-  <app-grid *ngIf="grid == true"></app-grid>
+  <div class="ion-text-center" *ngFor="let type of types"><h2 class="montserrat" style="font-weight: bold;">Kategori: {{type.name}}</h2></div>
+  <app-list [types]="types" [recipeType]="recipeType" *ngIf="list == true"></app-list>
+  <app-grid [types]="types" [recipeType]="recipeType" *ngIf="grid == true"></app-grid>
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button>
       <ion-icon name="filter"></ion-icon>

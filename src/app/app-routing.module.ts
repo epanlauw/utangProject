@@ -27,11 +27,6 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'kategori',
-    loadChildren: () => import('./pages/kategori/kategori.module').then( m => m.KategoriPageModule),
-    canActivate: [AuthGuard]
-  },
-  {
     path: 'additem',
     loadChildren: () => import('./pages/additem/additem.module').then( m => m.AdditemPageModule),
     canActivate: [AuthGuard]
@@ -41,7 +36,12 @@ const routes: Routes = [
     loadChildren: () => import('./pages/about-us/about-us.module').then( m => m.AboutUsPageModule)
   },
   {
-    path: 'detail/:id',
+    path: 'kategori/:idKategori',
+    loadChildren: () => import('./pages/kategori/kategori.module').then( m => m.KategoriPageModule),
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'detail/:idDetail',
     loadChildren: () => import('./pages/detail/detail.module').then( m => m.DetailPageModule),
     canActivate: [AuthGuard]
   },

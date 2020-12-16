@@ -43,7 +43,7 @@
     <!-- nanti looping disini -->
     <ion-row>
       <ion-col size="4" *ngFor="let type of types">
-        <ion-card class="img-75" [routerLink]= "['/kategori']">
+        <ion-card (click)="changeToKategori(type.id)" class="img-75" [routerLink]= "['/kategori']">
           <ion-img *ngIf="type.id == 1" src="assets/icon/makanan_berat.jpg" ></ion-img>
           <ion-img *ngIf="type.id == 2" src="assets/icon/makanan_ringan.jpg" ></ion-img>
           <div class="overlay">

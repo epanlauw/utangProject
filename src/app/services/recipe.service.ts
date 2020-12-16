@@ -16,6 +16,10 @@ export class RecipeService {
   getAllType() {
     return this.apiSrv.get('type');
   }
+  
+  getTypeDetail(id_type:string) {
+    return this.apiSrv.get('type/' + id_type);
+  }
 
   getRecipeDetail(id_recipe:any) {
 

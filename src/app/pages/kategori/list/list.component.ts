@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-list',
@@ -6,9 +6,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./list.component.scss'],
 })
 export class ListComponent implements OnInit {
+  @Input() recipeType:any[];
+  @Input() types:any[];
 
   constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log(this.types);
+  }
 
 }

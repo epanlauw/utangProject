@@ -12,6 +12,7 @@ export class MyrecipePage implements OnInit {
   
   public list:boolean;
   public grid:boolean;
+  
   user:any;
   recipes:any;
   types:any;
