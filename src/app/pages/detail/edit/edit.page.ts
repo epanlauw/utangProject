@@ -80,7 +80,8 @@ export class EditPage implements OnInit {
       ])),
       difficulty: new FormControl('', Validators.compose([
         Validators.required
-      ]))
+      ])),
+      image_url: new FormControl(null)
     });
   }
 

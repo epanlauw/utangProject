@@ -18,6 +18,7 @@ export class DetailPage implements OnInit {
   userTrue:boolean;
   users:any;
   user:any;
+  userCreated:any;
 
   constructor(
     private recipeSrv: RecipeService,
@@ -43,10 +44,6 @@ export class DetailPage implements OnInit {
     this.getRecipeDetail();
   } 
 
-  async deleteRecipe() {
-
-  }
-
   async getRecipeDetail() {
     const loading =  await this.presentLoading();
 
@@ -54,7 +51,11 @@ export class DetailPage implements OnInit {
       res.subscribe((data:any) => {
         loading.dismiss();
         this.recipe = data.data.recipe;
-
+        for(let user of this.users) {
+          if(user.id == this.recipe.id_user){
+            this.userCreated = user;
+          }
+        }
         this.stateTrue = true;
       });
     });

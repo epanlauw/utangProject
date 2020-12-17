@@ -54,7 +54,8 @@ export class EditPage implements OnInit {
       ])),
       dob: new FormControl('', Validators.compose([
         Validators.required
-      ]))
+      ])),
+      avatar_url: new FormControl(null)
     });
   }
 

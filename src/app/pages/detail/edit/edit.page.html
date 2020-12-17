@@ -27,7 +27,7 @@
               <ion-label>Gallery</ion-label>
             </ion-button>
           </ion-col>
-          <input type="file" *ngIf="isDesktop" #filePicker (change)="onFileChoose($event)" formControlName="avatar_url">
+          <input type="file" *ngIf="isDesktop" #filePicker (change)="onFileChoose($event)" formControlName="image_url">
         </ion-row>
         <ion-row>
           <ion-card *ngIf="imageUrl">
