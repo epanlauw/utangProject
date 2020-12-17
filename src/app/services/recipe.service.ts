@@ -42,7 +42,7 @@ export class RecipeService {
   }
 
   deleteRecipe(id_recipe: any){
-   
+    return this.apiSrv.delete('recipe/' + id_recipe);
   }
 
   editRecipe(newRecipe: any, id_recipe: any){

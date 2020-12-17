@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { LoadingController } from '@ionic/angular';
+import { AlertController, LoadingController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
 import { RecipeService } from 'src/app/services/recipe.service';
 
@@ -24,7 +24,8 @@ export class DetailPage implements OnInit {
     private authSrv: AuthService,
     private loadingCtrl: LoadingController,
     private activatedRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private alertCtrl: AlertController
   ) { }
 
   ngOnInit() {    
@@ -89,5 +90,35 @@ export class DetailPage implements OnInit {
     loading.present();
     return loading;
   }
+
+  async presentAlert() {
+    const alert = await this.alertCtrl.create({
+      header: 'Apakah kamu yakin?',
+      message: 'Apakah kamu benar - benar ingin menghapus recipe ini?',
+      buttons: [
+        {
+          text: 'Batal',
+          role: 'cancel'
+        },
+        {
+          text: 'Hapus',
+          handler: () => this.delete()
+        }
+      ]
+    });
+
+    await alert.present();
+  }
   
+
+  async delete() {
+    const loading =  await this.presentLoading();
+    this.recipeSrv.deleteRecipe(this.id).then(res => {
+      res.subscribe((data:any) => {
+        loading.dismiss();
+        console.log(data);
+        this.router.navigateByUrl("home");
+      });
+    })
+  }
 }
